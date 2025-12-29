@@ -1,0 +1,57 @@
+:root {
+    --tp-star-size: 18px;
+    /* adjust 16–22 safely */
+}
+
+.tp-stars {
+    display: flex;
+    gap: 2px;
+}
+
+.tp-star {
+    width: var(--tp-star-size);
+    height: var(--tp-star-size);
+    background: #dcdce6;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:
+        inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* Fill layer */
+.tp-star-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #00b67a;
+    z-index: 1;
+}
+
+/* Divider line */
+.tp-star-divider {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.35);
+    z-index: 2;
+}
+
+/* SVG star */
+.tp-star-icon {
+    width: 90%;
+    /* 👈 prevents touching edges */
+    height: 90%;
+    fill: #fff;
+    z-index: 3;
+    pointer-events: none;
+}
