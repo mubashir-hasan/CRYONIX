@@ -29,27 +29,16 @@ function ProductDetail() {
         );
     }
 
-    // Mock related products - you can fetch these from API
-    const relatedProducts = [
-        { id: 1, name: "Related Product 1", price: 199, image: product.image_url },
-        { id: 2, name: "Related Product 2", price: 299, image: product.image_url },
-        { id: 3, name: "Related Product 3", price: 399, image: product.image_url },
-        { id: 4, name: "Related Product 4", price: 499, image: product.image_url },
-    ];
-
     return (
         <div className="product-detail-page">
-            {/* Breadcrumb */}
             <div className="breadcrumb-section">
                 <button onClick={() => navigate('/product')} className="breadcrumb-link">
                     <i className="bi bi-arrow-left"></i> Back to Products
                 </button>
             </div>
 
-            {/* Main Product Section */}
             <div className="product-detail-container">
                 <div className="product-detail-grid">
-                    {/* LEFT: Image Gallery */}
                     <div className="product-gallery">
                         <div className="main-image-wrapper">
                             <img
@@ -66,18 +55,16 @@ function ProductDetail() {
                         </div>
                     </div>
 
-                    {/* RIGHT: Product Info */}
                     <div className="product-info-detail">
                         <div className="product-header-detail">
                             <h1 className="product-title-detail">{product.name}</h1>
                             <div className="product-meta-row">
-                                <ProductRating rating={4.6} />
+                                <ProductRating rating={2.9} />
                                 <span className="reviews-count">(128 reviews)</span>
                                 <span className="sku-text">SKU: {product.sku}</span>
                             </div>
                         </div>
 
-                        {/* Price Section */}
                         <div className="price-section-detail">
                             <div className="price-main">
                                 <span className="current-price">Rs {product.price}</span>
@@ -86,7 +73,6 @@ function ProductDetail() {
                             </div>
                         </div>
 
-                        {/* Availability */}
                         <div className="availability-section">
                             {product.stock > 0 ? (
                                 <div className="in-stock">
@@ -101,7 +87,6 @@ function ProductDetail() {
                             )}
                         </div>
 
-                        {/* Quick Features */}
                         <div className="quick-features">
                             <div className="feature-item">
                                 <i className="bi bi-truck"></i>
@@ -117,7 +102,6 @@ function ProductDetail() {
                             </div>
                         </div>
 
-                        {/* Quantity Selector */}
                         <div className="quantity-section-detail">
                             <label className="quantity-label">Quantity:</label>
                             <div className="quantity-controls">
@@ -145,7 +129,6 @@ function ProductDetail() {
                             <span className="stock-info">{product.stock} available</span>
                         </div>
 
-                        {/* Action Buttons */}
                         <div className="action-buttons-detail">
                             <button className="btn-add-cart-detail">
                                 <i className="bi bi-cart-plus"></i>
@@ -157,7 +140,6 @@ function ProductDetail() {
                             </button>
                         </div>
 
-                        {/* Additional Info */}
                         <div className="additional-info">
                             <div className="info-item">
                                 <i className="bi bi-credit-card"></i>
@@ -172,7 +154,6 @@ function ProductDetail() {
                 </div>
             </div>
 
-            {/* Product Details Tabs */}
             <div className="product-tabs-section">
                 <div className="tabs-header">
                     <button
@@ -225,27 +206,6 @@ function ProductDetail() {
                             </div>
                         </div>
                     )}
-                </div>
-            </div>
-
-            {/* Related Products */}
-            <div className="related-products-section">
-                <h2 className="section-title-detail">You May Also Like</h2>
-                <div className="related-products-grid">
-                    {relatedProducts.map((item) => (
-                        <div
-                            key={item.id}
-                            className="related-product-card"
-                            onClick={() => navigate(`/product/${item.id}`)}
-                        >
-                            <img
-                                src={`http://localhost:5000/${item.image}`}
-                                alt={item.name}
-                            />
-                            <h4>{item.name}</h4>
-                            <p className="related-price">Rs {item.price}</p>
-                        </div>
-                    ))}
                 </div>
             </div>
         </div>

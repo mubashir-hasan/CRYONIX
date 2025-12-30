@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import './css/Product.css';
 import { useNavigate } from "react-router-dom";
+import ProductRating from "../components/star/ProductRating";
 
 function Product() {
     const [products, setProducts] = useState([]);
@@ -126,11 +127,7 @@ function Product() {
                                     <h3 className="product-name-modern">{product.name}</h3>
 
                                     <div className="product-rating-modern">
-                                        <i className="bi bi-star-fill"></i>
-                                        <i className="bi bi-star-fill"></i>
-                                        <i className="bi bi-star-fill"></i>
-                                        <i className="bi bi-star-fill"></i>
-                                        <i className="bi bi-star-half"></i>
+                                        <ProductRating rating={4.6} />
                                         <span className="rating-count-modern">(4.5)</span>
                                     </div>
 

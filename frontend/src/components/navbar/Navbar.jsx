@@ -3,6 +3,7 @@ import './Navbar.css';
 import { useEffect, useState } from "react";
 import UserLogin from "../../pages/Auth/Login.jsx";
 import UserSignup from "../../pages/Auth/Signup.jsx";
+import logo from '../../assets/logo.svg';
 
 
 
@@ -30,7 +31,7 @@ function Navbar(){
             <div className="container-fluid navbar-main">
                 <Link className="navbar-brand" to="/">
                     <img
-                        src={`http://localhost:3000/logo.svg`}
+                        src={logo}
                         alt="Logo"
                         width={150}
                         className="logo-img"
@@ -74,14 +75,14 @@ function Navbar(){
                     <div className="d-flex ms-auto my-2 button-group">
                         <button
                             className="btn btn-outline-custom me-3"
-                            onClick={UserLogin}
+                            onClick={() => navigate("/user/user_login")}
                             type="button"
                         >
                             Login
                         </button>
                         <button
                             className="btn btn-custom-primary"
-                            onClick={UserSignup}
+                            onClick={() => navigate("/user/user_signup")}
                             type="button"
                         >
                             Sign up

@@ -1,143 +1,143 @@
 @import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
 
 :root {
-    --bs-body-bg: #272624;
-    --bs-background: #272624;
-    --bs-secondary-bg: #1A2226;
+  --bs-body-bg: #272624;
+  --bs-background: #272624;
+  --bs-secondary-bg: #1A2226;
 
-    --bs-body-color: #E0FFFF;
-    --bs-text-primary: #E0FFFF;
-    --bs-text-secondary: #A0E8E8;
-    --bs-text-muted: #A0E8E8;
+  --bs-body-color: #E0FFFF;
+  --bs-text-primary: #E0FFFF;
+  --bs-text-secondary: #A0E8E8;
+  --bs-text-muted: #A0E8E8;
 
-    --bs-primary: #00E0E0;
-    --bs-primary-rgb: 0, 224, 224;
-    --bs-secondary: #00C8C8;
-    --bs-secondary-rgb: 0, 200, 200;
+  --bs-primary: #00E0E0;
+  --bs-primary-rgb: 0, 224, 224;
+  --bs-secondary: #00C8C8;
+  --bs-secondary-rgb: 0, 200, 200;
 
-    --bs-hover: #00FFFF;
-    --bs-active: #00A8A8;
-    --bs-focus: #00F0F0;
+  --bs-hover: #00FFFF;
+  --bs-active: #00A8A8;
+  --bs-focus: #00F0F0;
 
-    --bs-btn-bg: #00E0E0;
-    --bs-btn-color: #272624;
-    --bs-btn-hover-bg: #00FFFF;
-    --bs-btn-hover-color: #000000;
-    --bs-btn-active-bg: #00A8A8;
-    --bs-btn-active-color: #000000;
+  --bs-btn-bg: #00E0E0;
+  --bs-btn-color: #272624;
+  --bs-btn-hover-bg: #00FFFF;
+  --bs-btn-hover-color: #000000;
+  --bs-btn-active-bg: #00A8A8;
+  --bs-btn-active-color: #000000;
 
-    --bs-border-color: #00F0F0;
-    --bs-border-color-subtle: rgba(0, 240, 240, 0.3);
+  --bs-border-color: #00F0F0;
+  --bs-border-color-subtle: rgba(0, 240, 240, 0.3);
 
-    --bs-link-color: #00C8C8;
-    --bs-link-hover-color: #00FFFF;
+  --bs-link-color: #00C8C8;
+  --bs-link-hover-color: #00FFFF;
 
-    --bs-delete: #FF4444;
-    --bs-danger: #FF4444;
+  --bs-delete: #FF4444;
+  --bs-danger: #FF4444;
 
-    --bs-gradient-cyan: linear-gradient(135deg, #00C8C8 0%, #00FFFF 50%, #00E0E0 100%);
-    --bs-gradient-dark: linear-gradient(180deg, #1A2226 0%, #272624 100%);
-    --bs-gradient-glow: linear-gradient(90deg, transparent 0%, #00F0F0 50%, transparent 100%);
+  --bs-gradient-cyan: linear-gradient(135deg, #00C8C8 0%, #00FFFF 50%, #00E0E0 100%);
+  --bs-gradient-dark: linear-gradient(180deg, #1A2226 0%, #272624 100%);
+  --bs-gradient-glow: linear-gradient(90deg, transparent 0%, #00F0F0 50%, transparent 100%);
 }
 
 body {
-    font-family: "Tilt Neon", cursive;
-    background-color: var(--bs-background)!important;
-    color: var(--bs-body-color);
+  font-family: "Tilt Neon", cursive;
+  background-color: var(--bs-background) !important;
+  color: var(--bs-body-color);
 }
 
 /* Button Styles */
 .btn-primary {
-    background: var(--bs-btn-bg);
-    color: var(--bs-btn-color);
-    border: 2px solid var(--bs-border-color);
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(0, 240, 240, 0.3);
+  background: var(--bs-btn-bg);
+  color: var(--bs-btn-color);
+  border: 2px solid var(--bs-border-color);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(0, 240, 240, 0.3);
 }
 
 .btn-primary:hover {
-    background: var(--bs-btn-hover-bg);
-    color: var(--bs-btn-hover-color);
-    border-color: var(--bs-hover);
-    box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
-    transform: translateY(-2px);
+  background: var(--bs-btn-hover-bg);
+  color: var(--bs-btn-hover-color);
+  border-color: var(--bs-hover);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+  transform: translateY(-2px);
 }
 
 .btn-primary:active,
 .btn-primary:focus {
-    background: var(--bs-btn-active-bg);
-    color: var(--bs-btn-active-color);
-    border-color: var(--bs-active);
-    box-shadow: 0 0 20px rgba(0, 168, 168, 0.5);
+  background: var(--bs-btn-active-bg);
+  color: var(--bs-btn-active-color);
+  border-color: var(--bs-active);
+  box-shadow: 0 0 20px rgba(0, 168, 168, 0.5);
 }
 
 /* Gradient Button Variant */
 .btn-gradient {
-    background: var(--bs-gradient-cyan);
-    color: #000000;
-    border: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 20px rgba(0, 224, 224, 0.4);
+  background: var(--bs-gradient-cyan);
+  color: #000000;
+  border: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 224, 224, 0.4);
 }
 
 .btn-gradient:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 35px rgba(0, 255, 255, 0.7);
-    filter: brightness(1.2);
+  transform: translateY(-3px);
+  box-shadow: 0 0 35px rgba(0, 255, 255, 0.7);
+  filter: brightness(1.2);
 }
 
 /* Card Styles */
 .card {
-    background-color: var(--bs-secondary-bg);
-    border: 1px solid var(--bs-border-color-subtle);
-    color: var(--bs-text-primary);
-    transition: all 0.3s ease;
+  background-color: var(--bs-secondary-bg);
+  border: 1px solid var(--bs-border-color-subtle);
+  color: var(--bs-text-primary);
+  transition: all 0.3s ease;
 }
 
 .card:hover {
-    border-color: var(--bs-border-color);
-    box-shadow: 0 0 20px rgba(0, 240, 240, 0.2);
+  border-color: var(--bs-border-color);
+  box-shadow: 0 0 20px rgba(0, 240, 240, 0.2);
 }
 
 /* Link Styles */
 a {
-    color: var(--bs-link-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
+  color: var(--bs-link-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 a:hover {
-    color: var(--bs-link-hover-color);
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  color: var(--bs-link-hover-color);
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
 }
 
 /* Border Glow Effect */
 .border-glow {
-    border: 2px solid var(--bs-border-color);
-    box-shadow: 0 0 15px rgba(0, 240, 240, 0.3);
+  border: 2px solid var(--bs-border-color);
+  box-shadow: 0 0 15px rgba(0, 240, 240, 0.3);
 }
 
 /* Text Gradient */
 .text-gradient {
-    background: var(--bs-gradient-cyan);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: bold;
+  background: var(--bs-gradient-cyan);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
 }
 
 /* Form Controls */
 .form-control {
-    background-color: var(--bs-secondary-bg);
-    border: 1px solid var(--bs-border-color-subtle);
-    color: var(--bs-text-primary);
+  background-color: var(--bs-secondary-bg);
+  border: 1px solid var(--bs-border-color-subtle);
+  color: var(--bs-text-primary);
 }
 
 .form-control:focus {
-    background-color: var(--bs-secondary-bg);
-    border-color: var(--bs-focus);
-    color: var(--bs-text-primary);
-    box-shadow: 0 0 15px rgba(0, 240, 240, 0.3);
+  background-color: var(--bs-secondary-bg);
+  border-color: var(--bs-focus);
+  color: var(--bs-text-primary);
+  box-shadow: 0 0 15px rgba(0, 240, 240, 0.3);
 }

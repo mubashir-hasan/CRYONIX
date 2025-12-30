@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Login.css';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import '../admin/LoginPage/Login.css'
 
-function UserLogin() {
+
+function AdminLogin() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -18,7 +18,7 @@ function UserLogin() {
         setError("");
 
         try {
-            const response = await fetch('http://localhost:5000/api/user/user_login', {
+            const response = await fetch('http://localhost:5000/api/admin/admin_login', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
@@ -34,7 +34,7 @@ function UserLogin() {
             if (data.status) {
                 localStorage.setItem('accessToken', data.token);
                 toast.success("Login successful 🎉");
-                navigate('/user/products', { replace: true });
+                navigate('/admin/dashboard', { replace: true });
             } else {
                 setError(data.message || "Login failed. Please try again.");
             }
@@ -58,14 +58,13 @@ function UserLogin() {
                             </div>
                         </div>
                         <h1 className='login-title'>
-                            Welcome <span className='text-gradient'>Back</span>
+                            Welcome Back<span className='text-gradient'> Admin</span>
                         </h1>
                         <p className='login-subtitle'>
                             Sign in to access your account
                         </p>
                     </div>
 
-                    {/* Error Message */}
                     {error && (
                         <div className='error-message'>
                             <i className="bi bi-exclamation-circle"></i>
@@ -75,7 +74,6 @@ function UserLogin() {
 
                     {/* Form */}
                     <form onSubmit={handleSubmit} className='login-form'>
-                        {/* Email Field */}
                         <div className='form-group-modern'>
                             <label className='form-label-modern' htmlFor='email'>
                                 Email Address
@@ -150,38 +148,10 @@ function UserLogin() {
                             )}
                         </button>
                     </form>
-
-                    {/* Footer */}
-                    <div className='login-footer'>
-                        <p>
-                            Don't have an account?{' '}
-                            <a href='#' className='signup-link'>
-                                Sign up
-                            </a>
-                        </p>
-                    </div>
-
-                    {/* Social Login (Optional) */}
-                    <div className='social-login'>
-                        <div className='divider'>
-                            <span>Or continue with</span>
-                        </div>
-                        <div className='social-buttons'>
-                            <button className='social-btn'>
-                                <i className="bi bi-google"></i>
-                            </button>
-                            <button className='social-btn'>
-                                <i className="bi bi-facebook"></i>
-                            </button>
-                            <button className='social-btn'>
-                                <i className="bi bi-apple"></i>
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     );
 }
 
-export default UserLogin;
+export default AdminLogin;
