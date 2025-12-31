@@ -9,7 +9,6 @@ import userRoutes from './routes/userRoutes.js'
 import productRoutes from './routes/productRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
 import cardRoutes from './routes/cartRoutes.js'
-import paymentRoutes from './routes/paymentRoutes.js'
 
 const port = process.env.PORT
 
@@ -28,7 +27,6 @@ app.use('/api/admin', adminRoutes)
 
 app.use('/api/cart', cardRoutes)
 
-app.use('/api/payment', paymentRoutes)
 
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 

@@ -4,15 +4,15 @@ import jwt from 'jsonwebtoken';
 
 export const userRegister = (req, res)=>{
 
-    const {name, email, pass, dob, address, phone_no, gender}= req.body;
+    const {name, email, password, dob, address, phone_no, gender}= req.body;
 
     const checkquery = "SELECT * FROM users where email = ?"
 
-    db.checkquery(checkquery,[])
+    db.query(checkquery,[email])
 
     const query = "INSERT INTO users (`name`, `email`, `password`, `dob`, `address`, `phone_no`, `gender`, created_at) VALUES(?, ?, ?, ?, ?, ?, ?, NOW())" ;
 
-    db.query(query, [name, email, pass, dob, address, phone_no, gender], (err, result)=>{
+    db.query(query, [name, email, password, dob, address, phone_no, gender], (err, result)=>{
         if(err){
             res.json({
                 status:false,

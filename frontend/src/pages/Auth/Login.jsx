@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import '../admin/LoginPage/Login.css'
+import '../admin/LoginPage/Login.css';
+import { Link } from 'react-router-dom';
 
 function UserLogin() {
     const [email, setEmail] = useState("");
@@ -37,9 +38,11 @@ function UserLogin() {
                 navigate('/user/products', { replace: true });
             } else {
                 setError(data.message || "Login failed. Please try again.");
+                toast.error("Login failed. Please try again !!!");
             }
         } catch (err) {
             setError("An error occurred. Please try again.");
+            toast.error("Login failed. Please try again !!!");
             console.error(err);
         } finally {
             setLoading(false);
@@ -52,11 +55,6 @@ function UserLogin() {
                 <div className='login-card'>
                     {/* Header */}
                     <div className='login-header'>
-                        <div className='logo-section'>
-                            <div className='logo-circle'>
-                                <i className="bi bi-shield-lock"></i>
-                            </div>
-                        </div>
                         <h1 className='login-title'>
                             Welcome <span className='text-gradient'>Back</span>
                         </h1>
@@ -155,28 +153,10 @@ function UserLogin() {
                     <div className='login-footer'>
                         <p>
                             Don't have an account?{' '}
-                            <a href='#' className='signup-link'>
+                            <Link to="/user/user_signup" className="signup-link">
                                 Sign up
-                            </a>
+                            </Link>
                         </p>
-                    </div>
-
-                    {/* Social Login (Optional) */}
-                    <div className='social-login'>
-                        <div className='divider'>
-                            <span>Or continue with</span>
-                        </div>
-                        <div className='social-buttons'>
-                            <button className='social-btn'>
-                                <i className="bi bi-google"></i>
-                            </button>
-                            <button className='social-btn'>
-                                <i className="bi bi-facebook"></i>
-                            </button>
-                            <button className='social-btn'>
-                                <i className="bi bi-apple"></i>
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>

@@ -13,12 +13,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import Footer from './components/footer/Footer';
 import UserLogin from './pages/Auth/Login';
 import UserSignup from './pages/Auth/Signup';
+import ScrollToTop from './components/Scrolltotop';
+import ScrollToTopButton from './components/scrolltotopbutton/ScrolltotopButton';
 
 function App() {
 
   return (
     <>
       <div>
+        <ScrollToTop />
+        <ScrollToTopButton />
         <Navbar />
         <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
         <Routes>

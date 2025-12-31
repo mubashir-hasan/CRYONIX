@@ -52,11 +52,6 @@ function AdminLogin() {
                 <div className='login-card'>
                     {/* Header */}
                     <div className='login-header'>
-                        <div className='logo-section'>
-                            <div className='logo-circle'>
-                                <i className="bi bi-shield-lock"></i>
-                            </div>
-                        </div>
                         <h1 className='login-title'>
                             Welcome Back<span className='text-gradient'> Admin</span>
                         </h1>
