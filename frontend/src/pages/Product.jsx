@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import './css/Product.css';
 import { useNavigate } from "react-router-dom";
 import ProductRating from "../components/star/ProductRating";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function Product() {
     const [products, setProducts] = useState([]);
@@ -10,23 +13,55 @@ function Product() {
     const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
 
-    useEffect(() => {
-        fetch('http://localhost:5000/api/products')
-            .then(res => res.json())
-            .then(data => {
-                if (data.status) {
-                    setProducts(data.products);
-                    setLoading(false);
-                }
-            })
-            .catch(error => {
-                console.log('Something Went Wrong', error);
-                setLoading(false);
-            });
-    }, []);
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/api/products')
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             if (data.status) {
+    //                 setProducts(data.products);
+    //                 setLoading(false);
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.log('Something Went Wrong', error);
+    //             setLoading(false);
+    //         });
+    // }, []);
 
-    const filteredProducts = products.filter(product =>
-        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+    useEffect(() => {fetchProducts()},[filter]);
+
+    const fetchProducts = async () => {
+        setLoading(true);
+
+        let fetchProductsUrl = 'http://localhost:5000/api/products';
+        if (filter === 'featured') {
+            fetchProductsUrl += '/featured';
+        } else if (filter === 'new') {
+            fetchProductsUrl += '/new_products';
+        }
+
+        try {
+            const res = await fetch(fetchProductsUrl);
+            const data = await res.json();
+
+            if (data.status && Array.isArray(data.products)) {
+                setProducts(data.products);
+            } else {
+                setProducts([]);
+                console.error("No products returned from API:", data);
+            }
+        } catch (error) {
+            console.error('Something went wrong', error);
+            toast.error('Failed to fetch products. Please try again later !!!');
+            setProducts([]);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
+    const filteredProducts = (products || []).filter(product =>
+        product.name?.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     if (loading) {
@@ -54,7 +89,6 @@ function Product() {
                 </div>
             </div>
 
-            {/* Filter & Search Section */}
             <div className="product-controls">
                 <div className="search-wrapper">
                     <i className="bi bi-search search-icon"></i>
@@ -154,7 +188,11 @@ function Product() {
 
             {/* Results Count */}
             <div className="results-info">
-                <p>Showing {filteredProducts.length} of {products.length} products</p>
+                {/* <p>Showing {filteredProducts.length || 0} of {products.length || 0} products</p> */}
+                <p>
+                    Showing {Array.isArray(filteredProducts) ? filteredProducts.length : 0} of {Array.isArray(products) ? products.length : 0} products
+                </p>
+
             </div>
         </div>
     );

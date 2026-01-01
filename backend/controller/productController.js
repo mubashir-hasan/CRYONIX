@@ -88,3 +88,24 @@ export const getSingleProduct = (req, res) => {
     });
 };
  
+
+
+export const newProducts = (req, res) => {
+    const query = "SELECT * FROM products ORDER BY created_at DESC";
+
+    db.query(query, (err, result) => {
+        if(err){
+            res.status(500).json({
+                status:false,
+                message:"Something Went Wrong !!!"
+            })
+        } else{
+            res.status(200).json({
+                status:true,
+                message:"All Products Ascending Order",
+                products:result
+
+            })
+        }
+    })
+}

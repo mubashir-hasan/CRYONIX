@@ -16,7 +16,7 @@ function verifyToken (req, res, next){
     
 
     try {
-        const data = jwt.verify(token, process.env.JSONTOKEN);
+        const data = jwt.verify(token, process.env.JSONACCESSTOKEN);
 
         req.user = data;
 
@@ -27,6 +27,9 @@ function verifyToken (req, res, next){
             message:"Invalid Token !!"
         })
     }
+
+
+    
     
 }
 

@@ -30,9 +30,10 @@ function AdminLogin() {
             });
 
             const data = await response.json();
+            const token = data.accessToken;
 
             if (data.status) {
-                localStorage.setItem('accessToken', data.token);
+                localStorage.setItem('accessToken', token);
                 toast.success("Login successful 🎉");
                 navigate('/admin/dashboard', { replace: true });
             } else {

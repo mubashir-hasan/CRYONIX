@@ -35,8 +35,8 @@ function AddProduct() {
                 setLoading(false);
                 return;
             }
-
             const token = localStorage.getItem("accessToken");
+            console.log("TOKEN:", token);
             const imageForm = new FormData();
             imageForm.append("productImage", image);
 
