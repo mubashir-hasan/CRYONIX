@@ -40,9 +40,18 @@ export const userLogin = (req , res)=>{
     const query = "SELECT * FROM users WHERE email = ? AND password = ?";
     db.query(query, [email, pass], (err, result)=>{
 
+        if (err) {
+            console.error("DB ERROR:", err);
+            return res.status(500).json({
+                status: false,
+                message: "Database error"
+            });
+        }
+
+
         if(result.length > 0){
 
-            const token = jwt.sign({ id:result[0].id, email:result[0].email}, process.env.JSONTOKEN , { expiresIn:'10h' });
+            const token = jwt.sign({ id: result[0].id, email: result[0].email }, process.env.JSONACCESSTOKEN , { expiresIn:'10h' });
 
             res.json({
                 status:true,
