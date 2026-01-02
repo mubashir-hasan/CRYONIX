@@ -33,9 +33,13 @@ function UserLogin() {
             const data = await response.json();
 
             if (data.status) {
-                localStorage.setItem('accessToken', data.token);
-                toast.success("Login successful 🎉");
-                navigate('/user/products', { replace: true });
+                if (data.status) {
+                    localStorage.setItem('accessToken', data.token);
+                    localStorage.setItem('authType', 'user');
+                    localStorage.setItem('user', JSON.stringify(data.user)); // ⭐ IMPORTANT
+                    toast.success("Login successful 🎉");
+                    navigate('/product', { replace: true });
+                }
             } else {
                 setError(data.message || "Login failed. Please try again.");
                 toast.error("Login failed. Please try again !!!");

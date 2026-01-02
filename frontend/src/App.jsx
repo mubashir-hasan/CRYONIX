@@ -18,11 +18,14 @@ import ScrollToTopButton from './components/scrolltotopbutton/ScrolltotopButton'
 
 function App() {
 
+  const token = localStorage.getItem('accessToken');
+
   return (
     <>
       <div>
         <ScrollToTop />
         <ScrollToTopButton />
+        
         <Navbar />
         <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
         <Routes>
@@ -46,4 +49,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

@@ -46,6 +46,7 @@ export const adminLogin = (req, res) => {
         res.json({
             status: true,
             message: "Admin Logged In",
+            authType: "admin",
             accessToken,
             admin: {
                 id: admin.id,

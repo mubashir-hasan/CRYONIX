@@ -35,10 +35,10 @@ export const userRegister = (req, res)=>{
 
 export const userLogin = (req , res)=>{
 
-    const {email , pass} = req.body;
+    const {email , password} = req.body;
 
     const query = "SELECT * FROM users WHERE email = ? AND password = ?";
-    db.query(query, [email, pass], (err, result)=>{
+    db.query(query, [email, password], (err, result)=>{
 
         if (err) {
             console.error("DB ERROR:", err);
@@ -56,6 +56,7 @@ export const userLogin = (req , res)=>{
             res.json({
                 status:true,
                 message:"User Successfully Logged In",
+                authType: "user",
                 token:token,
                 user:result[0]
             })

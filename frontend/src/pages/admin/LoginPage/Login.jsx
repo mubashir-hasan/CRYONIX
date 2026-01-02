@@ -34,6 +34,9 @@ function AdminLogin() {
 
             if (data.status) {
                 localStorage.setItem('accessToken', token);
+                localStorage.setItem('authType', data.authType);
+                localStorage.setItem('user', JSON.stringify(data.user));
+
                 toast.success("Login successful 🎉");
                 navigate('/admin/dashboard', { replace: true });
             } else {
