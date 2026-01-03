@@ -15,6 +15,7 @@ import UserLogin from './pages/Auth/Login';
 import UserSignup from './pages/Auth/Signup';
 import ScrollToTop from './components/Scrolltotop';
 import ScrollToTopButton from './components/scrolltotopbutton/ScrolltotopButton';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 function App() {
 
@@ -37,8 +38,8 @@ function App() {
           <Route path='/user/user_signup' element={<UserSignup />} />
 
           <Route path='/admin/login' element={<AdminLogin />} />
-          <Route path='/admin/dashboard' element={<AllProducts />} />
-          <Route path='/admin/add-product' element={<AddProduct />} />
+          <Route path='/admin/dashboard' element={<ProtectedRoute allowed="admin"><AllProducts /></ProtectedRoute>} />
+          <Route path='/admin/add-product' element={<ProtectedRoute allowed="admin"><AddProduct /></ProtectedRoute>} />
 
 
         </Routes>

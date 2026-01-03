@@ -1,33 +1,43 @@
+/* Navbar Container */
 .navbar-outside {
     background: var(--bs-secondary-bg) !important;
     border: 2px solid var(--bs-border-color-subtle) !important;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
     position: relative;
-    overflow: hidden;
+    z-index: 1040;
 }
 
+/* Remove the line animation - it was causing overflow issues */
+/* If you want to keep it, uncomment below and it will stay contained
 .navbar-outside::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
+    left: 0;
     width: 100%;
     height: 2px;
     background: var(--bs-gradient-cyan);
-    transition: left 0.5s ease;
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
 }
 
 .navbar-outside:hover::before {
-    left: 100%;
+    transform: scaleX(1);
 }
+*/
 
 .navbar-outside:hover {
     border-color: var(--bs-border-color) !important;
     box-shadow: 0 8px 32px rgba(0, 240, 240, 0.2) !important;
 }
 
+.navbar-outside.scrolled {
+    box-shadow: 0 10px 40px rgba(0, 240, 240, 0.15) !important;
+    border-color: var(--bs-border-color) !important;
+}
 
+/* Logo */
 .navbar-brand {
     transition: transform 0.3s ease, filter 0.3s ease;
 }
@@ -41,7 +51,7 @@
     filter: brightness(1.1);
 }
 
-
+/* Nav Links */
 .navbar-nav .nav-link {
     color: var(--bs-text-primary) !important;
     font-weight: 500;
@@ -81,13 +91,17 @@
     box-shadow: 0 0 15px rgba(0, 224, 224, 0.2);
 }
 
+/* Buttons */
+.button-group {
+    display: flex;
+    align-items: center;
+}
 
 .button-group .btn {
     font-weight: 600;
     padding: 0.4rem 1.2rem;
     border-radius: 8px;
     transition: all 0.3s ease;
-    border: 2px solid transparent;
 }
 
 .btn-outline-custom {
@@ -115,98 +129,6 @@
     box-shadow: 0 6px 25px rgba(0, 255, 255, 0.5);
     filter: brightness(1.15);
 }
-
-
-.navbar-toggler {
-    border: 2px solid var(--bs-primary) !important;
-    padding: 0.5rem 0.75rem;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.navbar-toggler:hover {
-    background: rgba(0, 224, 224, 0.1);
-    box-shadow: 0 0 15px rgba(0, 224, 224, 0.3);
-}
-
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 224, 224, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-}
-
-.navbar-toggler:focus {
-    box-shadow: 0 0 20px rgba(0, 240, 240, 0.5) !important;
-}
-
-/* Desktop Styles */
-@media screen and (min-width: 992px) {
-    .navbar-outside {
-        margin: 0 10vw;
-    }
-
-    .navbar-main {
-        padding: 0.5rem 1.5rem;
-    }
-}
-
-@media screen and (min-width: 768px) and (max-width: 991px) {
-    .navbar-outside {
-        margin: 0 5vw;
-    }
-}
-
-/* Mobile Styles */
-@media screen and (max-width: 767px) {
-    .navbar-outside {
-        margin: 0 3vw;
-    }
-
-    .navbar-nav {
-        margin-top: 1rem;
-        gap: 0.5rem !important;
-    }
-
-    .navbar-nav .nav-link {
-        text-align: center;
-        padding: 0.75rem 1rem !important;
-        margin: 0.25rem 0;
-    }
-
-    .button-group {
-        flex-direction: column !important;
-        width: 100%;
-        gap: 0.75rem;
-        margin-top: 1rem !important;
-        margin-bottom: 0.5rem;
-    }
-
-    .button-group .btn {
-        width: 100%;
-    }
-}
-
-
-.navbar-collapse {
-    transition: all 0.3s ease-in-out;
-}
-
-@media screen and (max-width: 991px) {
-    .navbar-collapse {
-        background: rgba(26, 34, 38, 0.95);
-        margin: 1rem -1rem -1rem -1rem;
-        padding: 1rem;
-        border-radius: 0 0 1rem 1rem;
-        border-top: 1px solid var(--bs-border-color-subtle);
-    }
-}
-
-
-.navbar-outside.scrolled {
-    box-shadow: 0 10px 40px rgba(0, 240, 240, 0.15) !important;
-    border-color: var(--bs-border-color) !important;
-}
-
-
-/* Additional Navbar Styles for Dynamic Features */
 
 /* Cart Link */
 .cart-link {
@@ -264,7 +186,12 @@
     }
 }
 
-/* User Dropdown Button */
+/* User Dropdown */
+.dropdown {
+    position: relative;
+    z-index: 1050;
+}
+
 .user-dropdown-btn {
     background: rgba(0, 224, 224, 0.1) !important;
     border: 2px solid var(--bs-border-color-subtle) !important;
@@ -278,8 +205,7 @@
     gap: 0.5rem;
 }
 
-.user-dropdown-btn:hover,
-.user-dropdown-btn:focus {
+.user-dropdown-btn:hover {
     background: rgba(0, 224, 224, 0.2) !important;
     border-color: var(--bs-primary) !important;
     color: var(--bs-primary) !important;
@@ -290,35 +216,8 @@
     font-size: 1.25rem;
 }
 
-/* Admin Dropdown Button */
-.admin-dropdown-btn {
-    background: var(--bs-gradient-cyan) !important;
-    border: none !important;
-    color: #000000 !important;
-    font-weight: 700;
-    padding: 0.6rem 1.25rem;
-    border-radius: 0.75rem;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    box-shadow: 0 4px 15px rgba(0, 224, 224, 0.3);
-}
-
-.admin-dropdown-btn:hover,
-.admin-dropdown-btn:focus {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 255, 255, 0.5);
-    filter: brightness(1.15);
-}
-
-.admin-dropdown-btn i {
-    font-size: 1.25rem;
-}
-
-/* Dropdown Menu Styling */
-.user-dropdown-menu,
-.admin-dropdown-menu {
+/* Dropdown Menu */
+.user-dropdown-menu {
     background: var(--bs-secondary-bg) !important;
     border: 2px solid var(--bs-border-color-subtle) !important;
     border-radius: 0.75rem;
@@ -326,6 +225,8 @@
     margin-top: 0.75rem !important;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     min-width: 220px;
+    z-index: 1060;
+    position: absolute;
 }
 
 .dropdown-item {
@@ -362,10 +263,42 @@
     margin: 0.5rem 0;
 }
 
-/* Button Group Adjustments */
-.button-group {
-    display: flex;
-    align-items: center;
+/* Navbar Toggler */
+.navbar-toggler {
+    border: 2px solid var(--bs-primary) !important;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.navbar-toggler:hover {
+    background: rgba(0, 224, 224, 0.1);
+    box-shadow: 0 0 15px rgba(0, 224, 224, 0.3);
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 20px rgba(0, 240, 240, 0.5) !important;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 224, 224, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+/* Desktop Styles */
+@media screen and (min-width: 992px) {
+    .navbar-outside {
+        margin: 0 10vw;
+    }
+
+    .navbar-main {
+        padding: 0.5rem 1.5rem;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .navbar-outside {
+        margin: 0 5vw;
+    }
 }
 
 /* Mobile Responsive */
@@ -386,8 +319,7 @@
     }
 
     .button-group .btn,
-    .user-dropdown-btn,
-    .admin-dropdown-btn {
+    .user-dropdown-btn {
         width: 100%;
         justify-content: center;
     }
@@ -398,26 +330,29 @@
 
     .navbar-nav {
         text-align: center;
+        margin-top: 1rem;
     }
 
     .navbar-nav .nav-link {
         padding: 0.75rem 1rem !important;
+        margin: 0.25rem 0;
     }
 
     .dropdown {
         width: 100%;
     }
 
-    .user-dropdown-menu,
-    .admin-dropdown-menu {
+    .user-dropdown-menu {
         width: 100%;
     }
 }
 
 @media screen and (max-width: 767px) {
+    .navbar-outside {
+        margin: 0 3vw;
+    }
 
-    .user-dropdown-btn,
-    .admin-dropdown-btn {
+    .user-dropdown-btn {
         font-size: 0.95rem;
     }
 
@@ -425,27 +360,5 @@
         width: 100%;
         height: 45px;
         margin: 0.5rem 0;
-    }
-}
-
-/* Ensure Bootstrap Dropdown Works */
-.dropdown-toggle::after {
-    margin-left: 0.5rem;
-}
-
-.show>.dropdown-menu {
-    display: block;
-    animation: fadeIn 0.2s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
     }
 }

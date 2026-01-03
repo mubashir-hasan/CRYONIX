@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import { toast } from 'react-toastify';
+import { useAuth } from '../../../context/AuthContext';
 
 
 function AdminLogin() {
@@ -11,6 +12,8 @@ function AdminLogin() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const { login } = useAuth();
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -33,10 +36,11 @@ function AdminLogin() {
             const token = data.accessToken;
 
             if (data.status) {
-                localStorage.setItem('accessToken', token);
-                localStorage.setItem('authType', data.authType);
-                localStorage.setItem('user', JSON.stringify(data.user));
-
+                login({
+                    token: token,
+                    user: data.admin,
+                    authType: "admin"
+                });
                 toast.success("Login successful 🎉");
                 navigate('/admin/dashboard', { replace: true });
             } else {

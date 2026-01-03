@@ -51,14 +51,20 @@ export const userLogin = (req , res)=>{
 
         if(result.length > 0){
 
-            const token = jwt.sign({ id: result[0].id, email: result[0].email }, process.env.JSONACCESSTOKEN , { expiresIn:'10h' });
+            const user = result[0];
+
+            const token = jwt.sign({ id: user.id, email: user.email }, process.env.JSONACCESSTOKEN , { expiresIn:'10h' });
 
             res.json({
                 status:true,
                 message:"User Successfully Logged In",
                 authType: "user",
                 token:token,
-                user:result[0]
+                user:{
+                    id: user.id,
+                    name: user.name,
+                    email: user.email
+                }
             })
         }else{
             res.json({

@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../../assets/logo.svg';
+import { useAuth } from '../../context/AuthContext.jsx';
 
 function Navbar() {
     const [scrolled, setScrolled] = useState(false);
-    const [user, setUser] = useState(null);
-    const [authType, setAuthType] = useState(null);
     const [cartCount, setCartCount] = useState(0);
-    const [showDropdown, setShowDropdown] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
+    const { user, authType, logout, isAuthenticated } = useAuth();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -22,25 +21,13 @@ function Navbar() {
     }, []);
 
     useEffect(() => {
-        // Check if user is logged in
-        const token = localStorage.getItem('accessToken');
-        const storedAuthType = localStorage.getItem('authType');
-        const storedUser = localStorage.getItem('user');
-
-        if (token && storedAuthType) {
-            setAuthType(storedAuthType);
-
-            if (storedUser) {
-                try {
-                    setUser(JSON.parse(storedUser));
-                } catch (err) {
-                    console.error("Invalid user JSON:", err);
-                    setUser(null);
-                }
-            }
+        if (authType === "user") {
+            fetchCartCount();
+        } else {
+            setCartCount(0);
         }
+    }, [authType]);
 
-    }, []);
 
     const fetchCartCount = async () => {
         try {
@@ -59,12 +46,7 @@ function Navbar() {
     };
 
     const handleLogout = () => {
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('authType');
-        localStorage.removeItem('user');
-        setUser(null);
-        setAuthType(null);
-        setCartCount(0);
+        logout();
         navigate('/', { replace: true });
     };
 
@@ -98,7 +80,7 @@ function Navbar() {
 
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     {/* Guest User Navigation */}
-                    {!authType && (
+                    {!isAuthenticated && (
                         <>
                             <div className="navbar-nav d-flex mx-auto gap-2">
                                 <Link className={`nav-link ${isActive('/')}`} to='/'>
@@ -160,13 +142,14 @@ function Navbar() {
                                     <button
                                         className="btn user-dropdown-btn dropdown-toggle"
                                         type="button"
+                                        id="userDropdown"
                                         data-bs-toggle="dropdown"
                                         aria-expanded="false"
                                     >
                                         <i className="bi bi-person-circle me-2"></i>
                                         {user?.name}
                                     </button>
-                                    <ul className="dropdown-menu dropdown-menu-end user-dropdown-menu">
+                                    <ul className="dropdown-menu dropdown-menu-end user-dropdown-menu" aria-labelledby="userDropdown">
                                         <li>
                                             <Link className="dropdown-item" to="/profile">
                                                 <i className="bi bi-person me-2"></i>

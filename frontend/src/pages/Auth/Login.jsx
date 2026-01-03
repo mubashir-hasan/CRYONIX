@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../admin/LoginPage/Login.css';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext.jsx';
 
 function UserLogin() {
     const [email, setEmail] = useState("");
@@ -12,6 +13,7 @@ function UserLogin() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -33,13 +35,14 @@ function UserLogin() {
             const data = await response.json();
 
             if (data.status) {
-                if (data.status) {
-                    localStorage.setItem('accessToken', data.token);
-                    localStorage.setItem('authType', 'user');
-                    localStorage.setItem('user', JSON.stringify(data.user)); // ⭐ IMPORTANT
-                    toast.success("Login successful 🎉");
-                    navigate('/product', { replace: true });
-                }
+                login({
+                    token: data.token,
+                    user: data.user,
+                    authType: "user"
+                });
+                toast.success("Login successful 🎉");
+                navigate('/product', { replace: true });
+                
             } else {
                 setError(data.message || "Login failed. Please try again.");
                 toast.error("Login failed. Please try again !!!");
