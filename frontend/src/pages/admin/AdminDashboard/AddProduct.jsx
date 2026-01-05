@@ -16,6 +16,8 @@ function AddProduct() {
     });
 
     const [image, setImage] = useState(null);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -28,6 +30,8 @@ function AddProduct() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+        setError('');
+        setSuccess('');
 
         try {
             if (!image) {
@@ -93,83 +97,201 @@ function AddProduct() {
     };
 
     return (
-        <div className="new-product-container mx-auto">
-            <div className="p-5 border rounded shadow my-5">
-                <h2 className="text-center my-4">Add New Product</h2>
-
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-3">
-                        <label className="form-label">Product Name</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            name="name"
-                            value={productData.name}
-                            onChange={handleChange}
-                            required
-                        />
+        <div className="container py-4">
+            <div className="row justify-content-center">
+                <div className="col-12 col-lg-8 col-xl-7">
+                    {/* Header */}
+                    <div className="mb-4">
+                        <button
+                            className="btn btn-outline-secondary mb-3"
+                            onClick={() => navigate('/admin/products')}
+                        >
+                            <i className="bi bi-arrow-left me-2"></i>
+                            Back to Products
+                        </button>
+                        <h2 className="admin-page-title mb-2">Add New Product</h2>
+                        <p className="text-muted">Fill in the product details below</p>
                     </div>
 
-                    <div className="mb-3">
-                        <label className="form-label">Price (Rs)</label>
-                        <input
-                            type="number"
-                            className="form-control"
-                            name="price"
-                            value={productData.price}
-                            onChange={handleChange}
-                            required
-                        />
+                    {/* Alert Messages */}
+                    {error && (
+                        <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i className="bi bi-exclamation-triangle me-2"></i>
+                            {error}
+                            <button type="button" className="btn-close" onClick={() => setError('')}></button>
+                        </div>
+                    )}
+
+                    {success && (
+                        <div className="alert alert-success alert-dismissible fade show" role="alert">
+                            <i className="bi bi-check-circle me-2"></i>
+                            {success}
+                            <button type="button" className="btn-close" onClick={() => setSuccess('')}></button>
+                        </div>
+                    )}
+
+                    {/* Form Card */}
+                    <div className="card shadow-sm">
+                        <div className="card-body p-4">
+                            <form onSubmit={handleSubmit}>
+                                <div className="row g-3">
+                                    {/* Product Name */}
+                                    <div className="col-12">
+                                        <label className="form-label fw-semibold">
+                                            Product Name <span className="text-danger">*</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            className="form-control form-control-lg"
+                                            name="name"
+                                            placeholder="Enter product name"
+                                            value={productData.name}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                    </div>
+
+                                    {/* Price and Stock */}
+                                    <div className="col-md-6">
+                                        <label className="form-label fw-semibold">
+                                            Price (Rs) <span className="text-danger">*</span>
+                                        </label>
+                                        <div className="input-group input-group-lg">
+                                            <span className="input-group-text">Rs</span>
+                                            <input
+                                                type="number"
+                                                className="form-control"
+                                                name="price"
+                                                placeholder="0.00"
+                                                value={productData.price}
+                                                onChange={handleChange}
+                                                min="0"
+                                                step="0.01"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="col-md-6">
+                                        <label className="form-label fw-semibold">
+                                            Stock Quantity
+                                        </label>
+                                        <input
+                                            type="number"
+                                            className="form-control form-control-lg"
+                                            name="stock"
+                                            placeholder="0"
+                                            value={productData.stock}
+                                            onChange={handleChange}
+                                            min="0"
+                                        />
+                                    </div>
+
+                                    {/* SKU */}
+                                    <div className="col-12">
+                                        <label className="form-label fw-semibold">
+                                            SKU (Stock Keeping Unit)
+                                        </label>
+                                        <input
+                                            type="text"
+                                            className="form-control form-control-lg"
+                                            name="sku"
+                                            placeholder="e.g., PRD-001"
+                                            value={productData.sku}
+                                            onChange={handleChange}
+                                        />
+                                        <div className="form-text">Unique identifier for inventory management</div>
+                                    </div>
+
+                                    {/* Product Image */}
+                                    <div className="col-12">
+                                        <label className="form-label fw-semibold">
+                                            Product Image <span className="text-danger">*</span>
+                                        </label>
+                                        <input
+                                            type="file"
+                                            className="form-control form-control-lg"
+                                            accept="image/*"
+                                            onChange={(e) => setImage(e.target.files[0])}
+                                            required
+                                        />
+                                        <div className="form-text">Supported formats: JPG, PNG, GIF (Max 5MB)</div>
+
+                                        {/* Image Preview */}
+                                        {image && (
+                                            <div className="mt-3">
+                                                <p className="mb-2 fw-semibold">Preview:</p>
+                                                <img
+                                                    src={URL.createObjectURL(image)}
+                                                    alt="Preview"
+                                                    className="img-thumbnail"
+                                                    style={{ maxHeight: '200px', objectFit: 'cover' }}
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Description */}
+                                    <div className="col-12">
+                                        <label className="form-label fw-semibold">
+                                            Description
+                                        </label>
+                                        <textarea
+                                            className="form-control"
+                                            name="description"
+                                            rows="4"
+                                            placeholder="Enter product description..."
+                                            value={productData.description}
+                                            onChange={handleChange}
+                                        ></textarea>
+                                        <div className="form-text">
+                                            {productData.description.length} characters
+                                        </div>
+                                    </div>
+
+                                    {/* Submit Buttons */}
+                                    <div className="col-12 mt-4">
+                                        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <button
+                                                type="button"
+                                                className="btn btn-secondary btn-lg"
+                                                onClick={() => navigate('/admin/products')}
+                                                disabled={loading}
+                                            >
+                                                Cancel
+                                            </button>
+                                            <button
+                                                type="submit"
+                                                className="btn btn-primary btn-lg px-5"
+                                                disabled={loading}
+                                            >
+                                                {loading ? (
+                                                    <>
+                                                        <span className="spinner-border spinner-border-sm me-2"></span>
+                                                        Saving...
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <i className="bi bi-check-circle me-2"></i>
+                                                        Save Product
+                                                    </>
+                                                )}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
 
-                    <div className="mb-3">
-                        <label className="form-label">Stock</label>
-                        <input
-                            type="number"
-                            className="form-control"
-                            name="stock"
-                            value={productData.stock}
-                            onChange={handleChange}
-                        />
+                    {/* Help Text */}
+                    <div className="mt-3">
+                        <small className="text-muted">
+                            <i className="bi bi-info-circle me-1"></i>
+                            All fields marked with <span className="text-danger">*</span> are required
+                        </small>
                     </div>
-
-                    <div className="mb-3">
-                        <label className="form-label">SKU</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            name="sku"
-                            value={productData.sku}
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    <div className="mb-3">
-                        <label className="form-label">Product Image</label>
-                        <input
-                            type="file"
-                            className="form-control"
-                            accept="image/*"
-                            onChange={(e) => setImage(e.target.files[0])}
-                            required
-                        />
-                    </div>
-
-                    <div className="mb-3">
-                        <label className="form-label">Description</label>
-                        <textarea
-                            className="form-control"
-                            name="description"
-                            rows="3"
-                            value={productData.description}
-                            onChange={handleChange}
-                        ></textarea>
-                    </div>
-
-                    <button className="btn btn-warning w-100" disabled={loading}>
-                        {loading ? "Saving..." : "Save Product"}
-                    </button>
-                </form>
+                </div>
             </div>
         </div>
     );
