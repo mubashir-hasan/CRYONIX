@@ -255,7 +255,7 @@ function AddProduct() {
                                             <button
                                                 type="button"
                                                 className="btn btn-secondary btn-lg"
-                                                onClick={() => navigate('/admin/products')}
+                                                onClick={() => navigate('/admin/dashboard')}
                                                 disabled={loading}
                                             >
                                                 Cancel

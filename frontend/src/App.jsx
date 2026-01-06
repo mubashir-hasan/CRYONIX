@@ -16,6 +16,10 @@ import UserSignup from './pages/Auth/Signup';
 import ScrollToTop from './components/Scrolltotop';
 import ScrollToTopButton from './components/scrolltotopbutton/ScrolltotopButton';
 import ProtectedRoute from './routes/ProtectedRoute';
+import AdminLayout from './pages/admin/AdminDashboard/AdminSidebar';
+import AdminDashboard from './pages/admin/AdminDashboard/AdminDashboard';
+import Orders from './pages/admin/AdminDashboard/Orders';
+import Users from './pages/admin/AdminDashboard/Users';
 
 function App() {
 
@@ -36,11 +40,20 @@ function App() {
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path='/user/user_login' element={<UserLogin />} />
           <Route path='/user/user_signup' element={<UserSignup />} />
-
+          
           <Route path='/admin/login' element={<AdminLogin />} />
-          <Route path='/admin/dashboard' element={<ProtectedRoute allowed="admin"><AllProducts /></ProtectedRoute>} />
-          <Route path='/admin/add-product' element={<ProtectedRoute allowed="admin"><AddProduct /></ProtectedRoute>} />
 
+          <Route path="/admin/*" element={
+            <AdminLayout>
+              <Routes>
+                <Route path="dashboard" element={<ProtectedRoute allowed="admin"><AdminDashboard /></ProtectedRoute>} />
+                <Route path="products" element={<ProtectedRoute allowed="admin"><AllProducts /></ProtectedRoute>} />
+                <Route path="add-product" element={<ProtectedRoute allowed="admin"><AddProduct /></ProtectedRoute>} />
+                <Route path="orders" element={<ProtectedRoute allowed="admin"><Orders /></ProtectedRoute>} />
+                <Route path="users" element={<ProtectedRoute allowed="admin"><Users /></ProtectedRoute>} />
+              </Routes>
+            </AdminLayout>
+          } />
 
         </Routes>
         <Footer />
