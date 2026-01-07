@@ -58,9 +58,7 @@ function AdminSidebar() {
 
     return (
         <>
-            {/* Sidebar */}
             <div className={`admin-sidebar ${isCollapsed ? 'collapsed' : ''}`}>
-                {/* Logo/Brand */}
                 <div className="sidebar-header">
                     <div className="d-flex align-items-center justify-content-between">
                         <div className="d-flex align-items-center">
