@@ -79,7 +79,6 @@ function Navbar() {
                 </button>
 
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    {/* Guest User Navigation */}
                     {!isAuthenticated && (
                         <>
                             <div className="navbar-nav d-flex mx-auto gap-2">
