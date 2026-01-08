@@ -1,5 +1,5 @@
 import './App.css'
-import {  Routes, Route } from 'react-router-dom';
+import {  Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import Product from './pages/Product';
@@ -24,6 +24,9 @@ import Users from './pages/admin/AdminDashboard/Users';
 function App() {
 
   const token = localStorage.getItem('accessToken');
+  const location = useLocation();
+  const hideNavbar = location.pathname.startsWith("/admin");
+
 
   return (
     <>
@@ -31,7 +34,8 @@ function App() {
         <ScrollToTop />
         <ScrollToTopButton />
         
-        <Navbar />
+        {!hideNavbar && <Navbar />}
+
         <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
         <Routes>
           <Route path='/' element={<Home />} />

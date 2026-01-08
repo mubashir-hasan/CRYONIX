@@ -30,7 +30,7 @@ function AdminSidebar() {
             path: '/admin/products',
             submenu: [
                 { title: 'All Products', path: '/admin/products' },
-                { title: 'Add Product', path: '/admin/add-products' },
+                { title: 'Add Product', path: '/admin/add-product' },
                 { title: 'Categories', path: '/admin/categories' }
             ]
         },
