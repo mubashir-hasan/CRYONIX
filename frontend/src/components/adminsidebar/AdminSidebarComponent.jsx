@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import './AdminSidebarComponent.css';
 
 function AdminSidebar() {
     const [isCollapsed, setIsCollapsed] = useState(false);
