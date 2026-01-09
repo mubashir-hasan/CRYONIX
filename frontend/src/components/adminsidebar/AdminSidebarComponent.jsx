@@ -1,23 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './AdminSidebarComponent.css';
 
 function AdminSidebar() {
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 991);
+    const [openSubmenu, setOpenSubmenu] = useState(null);
+
     const location = useLocation();
     const navigate = useNavigate();
-
-    const handleLogout = () => {
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('authType');
-        localStorage.removeItem('user');
-        navigate('/', { replace: true });
-        window.location.reload();
-    };
-
-    const isActive = (path) => {
-        return location.pathname === path ? 'active' : '';
-    };
 
     const menuItems = [
         {
@@ -28,11 +19,10 @@ function AdminSidebar() {
         {
             title: 'Products',
             icon: 'bi-box-seam',
-            path: '/admin/products',
             submenu: [
-                { title: 'All Products', path: '/admin/products' },
-                { title: 'Add Product', path: '/admin/add-product' },
-                { title: 'Categories', path: '/admin/categories' }
+                { path: '/admin/products', title: 'All Products' },
+                { path: '/admin/add-product', title: 'Add Product' },
+                { path: '/admin/categories', title: 'Categories' }
             ]
         },
         {
@@ -57,102 +47,128 @@ function AdminSidebar() {
         }
     ];
 
+    const toggleSidebar = () => setIsCollapsed(!isCollapsed);
+
+    const toggleSubmenu = (index) => {
+        if (isCollapsed) return; // do nothing when collapsed
+        setOpenSubmenu(openSubmenu === index ? null : index);
+    };
+
+    useEffect(() => {
+        const resizeHandler = () => {
+            setIsMobile(window.innerWidth <= 991);
+            if (window.innerWidth > 991) {
+                setIsCollapsed(false); // reset back on desktop
+            }
+        };
+        window.addEventListener("resize", resizeHandler);
+        return () => window.removeEventListener("resize", resizeHandler);
+    }, []);
+
     return (
         <>
-            <div className={`admin-sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+            <aside className={`
+                admin-sidebar 
+                ${isCollapsed ? "collapsed" : ""}
+                ${isMobile && !isCollapsed ? "mobile-open" : ""}
+            `}>
+
+                {/* HEADER */}
                 <div className="sidebar-header">
-                    <div className="d-flex align-items-center justify-content-between">
-                        <div className="d-flex align-items-center">
-                            <div className="admin-logo">
-                                <i className="bi bi-shield-check"></i>
-                            </div>
-                            {!isCollapsed && (
-                                <div className="ms-3">
-                                    <h5 className="mb-0 fw-bold">Admin Panel</h5>
-                                    <small className="text-muted">CRYONIX</small>
-                                </div>
-                            )}
-                        </div>
+                    <div className="admin-logo">
+                        <i className="bi bi-shield-check"></i>
                     </div>
+                    {!isCollapsed && (
+                        <div className="ms-3">
+                            <h5 className="mb-0 fw-bold">Admin Panel</h5>
+                        </div>
+                    )}
                 </div>
 
-                {/* Navigation */}
+                {/* NAV */}
                 <nav className="sidebar-nav">
                     <ul className="nav flex-column">
+
                         {menuItems.map((item, index) => (
                             <li key={index} className="nav-item">
+
+                                {/* If submenu exists */}
                                 {item.submenu ? (
                                     <>
                                         <div
                                             className="nav-link sidebar-link"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target={`#submenu${index}`}
-                                            role="button"
-                                            aria-expanded="false"
+                                            onClick={() => toggleSubmenu(index)}
                                         >
-                                            <i className={`bi ${item.icon} me-3`}></i>
+                                            <i className={`bi ${item.icon} me-3`} />
                                             {!isCollapsed && (
                                                 <>
                                                     <span>{item.title}</span>
-                                                    <i className="bi bi-chevron-down ms-auto"></i>
+                                                    <i
+                                                        className={`bi ms-auto ${openSubmenu === index ? "bi-chevron-up" : "bi-chevron-down"
+                                                            }`}
+                                                    />
                                                 </>
                                             )}
                                         </div>
-                                        <div className="collapse" id={`submenu${index}`}>
-                                            <ul className="nav flex-column ms-3">
-                                                {item.submenu.map((subitem, subindex) => (
-                                                    <li key={subindex} className="nav-item">
+
+                                        {/* SUBMENU */}
+                                        {!isCollapsed && (
+                                            <ul
+                                                className={`submenu ${openSubmenu === index ? "show" : ""}`}
+                                            >
+                                                {item.submenu.map((sub, i) => (
+                                                    <li key={i}>
                                                         <Link
-                                                            to={subitem.path}
-                                                            className={`nav-link sidebar-sublink ${isActive(subitem.path)}`}
+                                                            to={sub.path}
+                                                            className={`submenu-link ${location.pathname === sub.path ? "active" : ""
+                                                                }`}
                                                         >
-                                                            {!isCollapsed && subitem.title}
+                                                            {sub.title}
                                                         </Link>
                                                     </li>
                                                 ))}
                                             </ul>
-                                        </div>
+                                        )}
                                     </>
                                 ) : (
                                     <Link
                                         to={item.path}
-                                        className={`nav-link sidebar-link ${isActive(item.path)}`}
+                                        className="nav-link sidebar-link"
                                     >
-                                        <i className={`bi ${item.icon} me-3`}></i>
+                                        <i className={`bi ${item.icon} me-3`} />
                                         {!isCollapsed && <span>{item.title}</span>}
                                     </Link>
                                 )}
+
                             </li>
                         ))}
+
                     </ul>
                 </nav>
 
-                {/* Footer */}
+                {/* FOOTER BUTTONS */}
                 <div className="sidebar-footer">
-                    <button
-                        className="btn btn-outline-danger w-100"
-                        onClick={handleLogout}
-                    >
-                        <i className="bi bi-box-arrow-left me-2"></i>
-                        {!isCollapsed && 'Logout'}
+                    <button className="btn btn-outline-primary" onClick={toggleSidebar}>
+                        <i className={`bi ${isCollapsed ? "bi-arrow-right-circle" : "bi-arrow-left-circle"} me-2`} />
+                        {!isCollapsed && "Collapse"}
+                    </button>
+
+                    <button className="btn btn-outline-danger" onClick={() => {
+                        localStorage.clear();
+                        navigate('/');
+                        window.location.reload();
+                    }}>
+                        <i className="bi bi-box-arrow-right me-2" />
+                        {!isCollapsed && "Logout"}
                     </button>
                 </div>
 
-                {/* Toggle Button */}
-                <button
-                    className="sidebar-toggle"
-                    onClick={() => setIsCollapsed(!isCollapsed)}
-                    title={isCollapsed ? 'Expand' : 'Collapse'}
-                >
-                    <i className={`bi ${isCollapsed ? 'bi-chevron-right' : 'bi-chevron-left'}`}></i>
-                </button>
-            </div>
+            </aside>
 
-            {/* Mobile Overlay */}
-            <div
-                className={`sidebar-overlay ${isCollapsed ? '' : 'show'}`}
-                onClick={() => setIsCollapsed(true)}
-            ></div>
+            {/* MOBILE OVERLAY */}
+            {isMobile && !isCollapsed && (
+                <div className="sidebar-overlay" onClick={() => setIsCollapsed(true)} />
+            )}
         </>
     );
 }
