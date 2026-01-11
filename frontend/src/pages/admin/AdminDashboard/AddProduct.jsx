@@ -99,8 +99,7 @@ function AddProduct() {
     return (
         <div className="container py-4">
             <div className="row justify-content-center">
-                <div className="col-12 col-lg-8 col-xl-7">
-                    {/* Header */}
+                <div className="col-12 col-lg-11 col-xl-10">
                     <div className="mb-4">
                         <button
                             className="btn btn-outline-secondary mb-3"
@@ -113,7 +112,6 @@ function AddProduct() {
                         <p className="text-muted">Fill in the product details below</p>
                     </div>
 
-                    {/* Alert Messages */}
                     {error && (
                         <div className="alert alert-danger alert-dismissible fade show" role="alert">
                             <i className="bi bi-exclamation-triangle me-2"></i>
@@ -151,7 +149,6 @@ function AddProduct() {
                                         />
                                     </div>
 
-                                    {/* Price and Stock */}
                                     <div className="col-md-6">
                                         <label className="form-label fw-semibold">
                                             Price (Rs) <span className="text-danger">*</span>
