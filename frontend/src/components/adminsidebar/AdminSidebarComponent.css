@@ -1,8 +1,7 @@
-/* LAYOUT */
+/* MAIN LAYOUT */
 .admin-layout {
     display: flex;
     min-height: 100vh;
-    width: 100%;
 }
 
 /* SIDEBAR BASE */
@@ -17,16 +16,16 @@
     display: flex;
     flex-direction: column;
     transition: 0.3s ease;
-    overflow: hidden;
-    z-index: 1030;
+    overflow-y: auto;
+    z-index: 1050;
 }
 
-/* COLLAPSED */
+/* COLLAPSED SIDEBAR (Desktop) */
 .admin-sidebar.collapsed {
     width: 80px;
 }
 
-/* MOBILE SLIDE */
+/* MOBILE SIDEBAR (Hidden by default) */
 @media (max-width: 991px) {
     .admin-sidebar {
         transform: translateX(-100%);
@@ -43,7 +42,6 @@
     border-bottom: 2px solid var(--bs-border-color-subtle);
     display: flex;
     align-items: center;
-    min-height: 90px;
 }
 
 .admin-logo {
@@ -51,17 +49,16 @@
     height: 48px;
     background: var(--bs-gradient-cyan);
     display: flex;
-    justify-content: center;
     align-items: center;
-    border-radius: 12px;
+    justify-content: center;
+    border-radius: 10px;
     font-size: 1.6rem;
 }
 
 /* NAVIGATION */
 .sidebar-nav {
-    flex: 1;
-    overflow-y: auto;
     padding: 1rem 0;
+    flex: 1;
 }
 
 .sidebar-link {
@@ -69,8 +66,9 @@
     color: var(--bs-text-secondary);
     display: flex;
     align-items: center;
+    cursor: pointer;
     font-weight: 500;
-    transition: 0.2s;
+    transition: background 0.2s ease;
 }
 
 .sidebar-link:hover {
@@ -80,80 +78,17 @@
 
 .sidebar-link.active {
     background: rgba(0, 224, 224, 0.15);
-    color: var(--bs-primary);
     border-left: 3px solid var(--bs-primary);
+    color: var(--bs-primary);
 }
 
-/* COLLAPSED NAVIGATION */
-.admin-sidebar.collapsed .sidebar-link span {
-    display: none;
-}
-
-/* FOOTER BUTTONS */
-.sidebar-footer {
-    padding: 1rem;
-    border-top: 2px solid var(--bs-border-color-subtle);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.sidebar-btn {
-    width: 100%;
-    font-weight: 600;
-}
-
-/* COLLAPSED FOOTER */
-.admin-sidebar.collapsed .sidebar-btn span {
-    display: none;
-}
-
-/* MAIN CONTENT */
-.admin-main-content {
-    flex: 1;
-    width: 100%;
-    min-height: 100vh;
-    margin-left: 280px;
-    padding: 2rem;
-    transition: margin-left 0.3s ease;
-}
-
-.admin-sidebar.collapsed~.admin-main-content {
-    margin-left: 80px;
-}
-
-/* MOBILE CONTENT */
-@media (max-width: 991px) {
-    .admin-main-content {
-        margin-left: 0 !important;
-        padding: 1rem;
-    }
-}
-
-/* MOBILE OVERLAY */
-.sidebar-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 900;
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0
-    }
-
-    to {
-        opacity: 1
-    }
-}
+/* SUBMENU */
 .submenu {
     height: 0;
     overflow: hidden;
     opacity: 0;
-    transition: all 0.3s ease;
     background: rgba(255, 255, 255, 0.05);
+    transition: height 0.3s ease, opacity 0.3s ease;
 }
 
 .submenu.show {
@@ -166,10 +101,67 @@
     display: block;
     padding: 0.6rem 0;
     color: var(--bs-text-secondary);
-    font-size: 0.9rem;
 }
 
 .submenu-link.active {
     color: var(--bs-primary);
     font-weight: 600;
+}
+
+/* FOOTER BUTTONS */
+.sidebar-footer {
+    padding: 1rem;
+    border-top: 2px solid var(--bs-border-color-subtle);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-btn span {
+    vertical-align: middle;
+}
+
+/* MOBILE MENU BUTTON (☰) */
+.mobile-menu-btn {
+    background: var(--bs-primary);
+    color: #fff;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* MOBILE CLOSE BUTTON (✖) */
+.mobile-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 1200;
+    background: var(--bs-danger);
+    color: #fff;
+    border: none;
+    padding: 8px 10px;
+    font-size: 22px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* MOBILE OVERLAY */
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
