@@ -3,21 +3,20 @@ import AdminSidebar from "../../../components/adminsidebar/AdminSidebarComponent
 import "./AdminSidebar.css";
 
 export default function AdminLayout({ children }) {
-    const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [isCollapsed, setIsCollapsed] = useState(false);
 
     return (
-        <div className="admin-container">
+        <div className="admin-layout">
 
-            {/* Sidebar */}
             <AdminSidebar
-                isOpen={sidebarOpen}
-                setSidebarOpen={setSidebarOpen}
+                isCollapsed={isCollapsed}
+                setIsCollapsed={setIsCollapsed}
             />
 
-            {/* Main Content */}
-            <main className={`admin-content ${sidebarOpen ? "sidebar-open" : ""}`}>
+            <main className={`admin-main-content ${isCollapsed ? "collapsed-content" : ""}`}>
                 {children}
             </main>
+
         </div>
     );
 }

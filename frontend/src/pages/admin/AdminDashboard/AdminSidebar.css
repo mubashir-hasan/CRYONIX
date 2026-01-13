@@ -13,4 +13,24 @@
   flex: 1;
   padding: 20px;
   background: #ECF0F2;
+} 
+/* MAIN CONTENT */
+.admin-main-content {
+  width: 100%;
+  min-height: 100vh;
+  margin-left: 220px;
+  /* full sidebar */
+  transition: margin-left 0.3s ease;
+}
+
+.admin-main-content.collapsed-content {
+  margin-left: 80px;
+  /* collapsed sidebar width */
+}
+
+/* MOBILE — content always full width */
+@media (max-width: 991px) {
+  .admin-main-content {
+    margin-left: 0 !important;
+  }
 }

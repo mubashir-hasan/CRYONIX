@@ -2,52 +2,42 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './AdminSidebarComponent.css';
 
-function AdminSidebar() {
+function AdminSidebar({ isCollapsed, setIsCollapsed }) {
 
     const location = useLocation();
     const navigate = useNavigate();
 
-    // STATES
-    const [isCollapsed, setIsCollapsed] = useState(false);        // Desktop collapse
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 991);
-    const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false); // Mobile open/close
-    const [openSubmenu, setOpenSubmenu] = useState(null);         // submenu toggle
+    const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+    const [openSubmenu, setOpenSubmenu] = useState(null);
 
-    // MENU ITEMS
     const menuItems = [
-        { title: 'Dashboard', icon: 'bi-speedometer2', path: '/admin/dashboard' },
+            { title: 'Dashboard', icon: 'bi-speedometer2', path: '/admin/dashboard' }, 
+            { title: 'Products', icon: 'bi-box-seam', 
+                submenu: [
+                    { title: 'All Products', path: '/admin/products' }, 
+                    { title: 'Add Product', path: '/admin/add-product' }, 
+                    { title: 'Categories', path: '/admin/categories' }
+                ] 
+            }, 
+            { title: 'Orders', icon: 'bi-cart-check', path: '/admin/orders' }, 
+            { title: 'Users', icon: 'bi-people', path: '/admin/users' }, 
+            { title: 'Analytics', icon: 'bi-graph-up', path: '/admin/analytics' }, 
+            { title: 'Settings', icon: 'bi-gear', path: '/admin/settings' }
+        ];
 
-        {
-            title: 'Products',
-            icon: 'bi-box-seam',
-            submenu: [
-                { title: 'All Products', path: '/admin/products' },
-                { title: 'Add Product', path: '/admin/add-product' },
-                { title: 'Categories', path: '/admin/categories' }
-            ]
-        },
-
-        { title: 'Orders', icon: 'bi-cart-check', path: '/admin/orders' },
-        { title: 'Users', icon: 'bi-people', path: '/admin/users' },
-        { title: 'Analytics', icon: 'bi-graph-up', path: '/admin/analytics' },
-        { title: 'Settings', icon: 'bi-gear', path: '/admin/settings' },
-    ];
-
-    // SUBMENU TOGGLE
     const toggleSubmenu = (index) => {
         if (isCollapsed && !isMobile) return;
         setOpenSubmenu(openSubmenu === index ? null : index);
     };
 
-    // HANDLE WINDOW RESIZE
     useEffect(() => {
         const handleResize = () => {
-            let mobile = window.innerWidth <= 991;
+            const mobile = window.innerWidth <= 991;
             setIsMobile(mobile);
 
             if (!mobile) {
                 setIsMobileSidebarOpen(false);
-                setIsCollapsed(false);
             }
         };
 
@@ -55,22 +45,16 @@ function AdminSidebar() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    // DESKTOP COLLAPSE BUTTON
-    const toggleCollapse = () => setIsCollapsed(!isCollapsed);
-
-    // MOBILE OPEN/CLOSE SIDEBAR
-    const toggleMobileSidebar = () => setIsMobileSidebarOpen(!isMobileSidebarOpen);
-
     return (
         <>
-            {/* MOBILE OPEN BUTTON (☰) */}
-            {isMobile && !isMobileSidebarOpen && (
-                <button className="mobile-menu-btn" onClick={toggleMobileSidebar}>
+
+            {/* Mobile Toggle Button */}
+            {isMobile && (
+                <button className="mobile-menu-btn" onClick={() => setIsMobileSidebarOpen(true)}>
                     <i className="bi bi-list"></i>
                 </button>
             )}
 
-            {/* SIDEBAR */}
             <aside
                 className={`
                     admin-sidebar 
@@ -78,9 +62,13 @@ function AdminSidebar() {
                     ${isMobile && isMobileSidebarOpen ? "mobile-open" : ""}
                 `}
             >
-                {isMobile && isMobileSidebarOpen && (
-                    <button className="mobile-close-btn" onClick={toggleMobileSidebar}>
-                        <i className="bi bi-x-lg"></i>
+
+                {isMobile && (
+                    <button
+                        className="mobile-close-btn"
+                        onClick={() => setIsMobileSidebarOpen(false)}
+                    >
+                        <i className="bi bi-x"></i>
                     </button>
                 )}
 
@@ -89,17 +77,16 @@ function AdminSidebar() {
                     <div className="admin-logo">
                         <i className="bi bi-shield-check"></i>
                     </div>
-
                     {!isCollapsed && !isMobile && (
                         <h5 className="ms-3 fw-bold">Admin Panel</h5>
                     )}
                 </div>
 
-                {/* MENU */}
+                {/* NAVIGATION */}
                 <nav className="sidebar-nav">
                     <ul className="nav flex-column">
                         {menuItems.map((item, index) => (
-                            <li key={index} className="nav-item">
+                            <li key={index}>
 
                                 {item.submenu ? (
                                     <>
@@ -108,16 +95,10 @@ function AdminSidebar() {
                                             onClick={() => toggleSubmenu(index)}
                                         >
                                             <i className={`bi ${item.icon} me-3`} />
-
                                             {!isCollapsed && (
                                                 <>
                                                     <span>{item.title}</span>
-                                                    <i
-                                                        className={`bi ms-auto ${openSubmenu === index
-                                                            ? "bi-chevron-up"
-                                                            : "bi-chevron-down"
-                                                            }`}
-                                                    />
+                                                    <i className={`bi ms-auto ${openSubmenu === index ? "bi-chevron-up" : "bi-chevron-down"}`} />
                                                 </>
                                             )}
                                         </div>
@@ -152,32 +133,31 @@ function AdminSidebar() {
                     </ul>
                 </nav>
 
-                {/* FOOTER BUTTONS */}
+                {/* FOOTER */}
                 <div className="sidebar-footer">
                     {!isMobile && (
-                        <button className="btn btn-outline-primary sidebar-btn" onClick={toggleCollapse}>
-                            <i className={`bi ${isCollapsed ? "bi-arrow-right-circle" : "bi-arrow-left-circle"} me-2`}></i>
-                            {!isCollapsed && <span>Collapse</span>}
+                        <button className="btn btn-outline-primary" onClick={() => setIsCollapsed(!isCollapsed)}>
+                            <i className={`bi ${isCollapsed ? "bi-arrow-right-circle" : "bi-arrow-left-circle"} me-2`} />
+                            {!isCollapsed && "Collapse"}
                         </button>
                     )}
 
                     <button
-                        className="btn btn-outline-danger sidebar-btn"
+                        className="btn btn-outline-danger"
                         onClick={() => {
                             localStorage.clear();
-                            navigate('/admin/login', { replace: true });
-                            window.location.reload();
+                            navigate('/admin/login');
                         }}
                     >
-                        <i className="bi bi-box-arrow-right me-2"></i>
-                        {!isCollapsed && <span>Logout</span>}
+                        <i className="bi bi-box-arrow-right me-2" />
+                        {!isCollapsed && "Logout"}
                     </button>
                 </div>
             </aside>
 
             {/* MOBILE OVERLAY */}
             {isMobile && isMobileSidebarOpen && (
-                <div className="sidebar-overlay" onClick={toggleMobileSidebar}></div>
+                <div className="sidebar-overlay" onClick={() => setIsMobileSidebarOpen(false)} />
             )}
         </>
     );
