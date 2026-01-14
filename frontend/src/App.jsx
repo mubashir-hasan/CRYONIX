@@ -20,52 +20,51 @@ import AdminLayout from './pages/admin/AdminDashboard/AdminSidebar';
 import AdminDashboard from './pages/admin/AdminDashboard/AdminDashboard';
 import Orders from './pages/admin/AdminDashboard/Orders';
 import Users from './pages/admin/AdminDashboard/Users';
+import Analytics from './pages/admin/AdminDashboard/Analytics';
+import Settings from './pages/admin/AdminDashboard/Setting';
 
 function App() {
 
   const token = localStorage.getItem('accessToken');
   const location = useLocation();
-  const hideNavbar = location.pathname.startsWith("/admin");
-
+  const hideNavbarAndFooter = location.pathname.startsWith("/admin");
 
   return (
     <>
-      <div>
-        <ScrollToTop />
-        <ScrollToTopButton />
-        
-        {!hideNavbar && <Navbar /> && <Footer />}
-        {!hideNavbar && <Footer />}
+      <ScrollToTop />
+      <ScrollToTopButton />
+      <ToastContainer position="top-right" autoClose={3000} />
 
-        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/product' element={<Product />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path='/user/user_login' element={<UserLogin />} />
-          <Route path='/user/user_signup' element={<UserSignup />} />
-          
-          <Route path='/admin/login' element={<AdminLogin />} />
+      {!hideNavbarAndFooter && <Navbar />}
 
-          <Route path="/admin/*" element={
-            <AdminLayout>
-              <Routes>
-                <Route path="dashboard" element={<ProtectedRoute allowed="admin"><AdminDashboard /></ProtectedRoute>} />
-                <Route path="products" element={<ProtectedRoute allowed="admin"><AllProducts /></ProtectedRoute>} />
-                <Route path="add-product" element={<ProtectedRoute allowed="admin"><AddProduct /></ProtectedRoute>} />
-                <Route path="orders" element={<ProtectedRoute allowed="admin"><Orders /></ProtectedRoute>} />
-                <Route path="users" element={<ProtectedRoute allowed="admin"><Users /></ProtectedRoute>} />
-              </Routes>
-            </AdminLayout>
-          } />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/product' element={<Product />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path='/user/user_login' element={<UserLogin />} />
+        <Route path='/user/user_signup' element={<UserSignup />} />
 
-        </Routes>
-        <Footer />
+        <Route path='/admin/login' element={<AdminLogin />} />
 
-      </div>
+        <Route path="/admin/*" element={
+          <AdminLayout>
+            <Routes>
+              <Route path="dashboard" element={<ProtectedRoute allowed="admin"><AdminDashboard /></ProtectedRoute>} />
+              <Route path="products" element={<ProtectedRoute allowed="admin"><AllProducts /></ProtectedRoute>} />
+              <Route path="add-product" element={<ProtectedRoute allowed="admin"><AddProduct /></ProtectedRoute>} />
+              <Route path="orders" element={<ProtectedRoute allowed="admin"><Orders /></ProtectedRoute>} />
+              <Route path="users" element={<ProtectedRoute allowed="admin"><Users /></ProtectedRoute>} />
+              <Route path="analytics" element={<ProtectedRoute allowed="admin"><Analytics /></ProtectedRoute>} />
+              <Route path="settings" element={<ProtectedRoute allowed="admin"><Settings /></ProtectedRoute>} />
+            </Routes>
+          </AdminLayout>
+        } />
+      </Routes>
+
+      {!hideNavbarAndFooter && <Footer />}
     </>
-  )
+  );
 }
 
 export default App;

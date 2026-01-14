@@ -16,8 +16,7 @@ function AdminSidebar({ isCollapsed, setIsCollapsed }) {
             { title: 'Products', icon: 'bi-box-seam', 
                 submenu: [
                     { title: 'All Products', path: '/admin/products' }, 
-                    { title: 'Add Product', path: '/admin/add-product' }, 
-                    { title: 'Categories', path: '/admin/categories' }
+                    { title: 'Add Product', path: '/admin/add-product' }
                 ] 
             }, 
             { title: 'Orders', icon: 'bi-cart-check', path: '/admin/orders' }, 
