@@ -21,20 +21,22 @@ function Users() {
   );
 
   return (
-    <div className="admin-page">
-      {/* Header */}
-      <div className="page-header mb-4">
+    <div className="admin-page m-4">
+
+      {/* PAGE HEADER */}
+      <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
-          <h2 className="page-title mb-2">Users Management</h2>
-          <p className="text-muted mb-0">Manage and monitor all registered users</p>
+          <h2 className="page-title mb-1">Users Management</h2>
+          <p className="text-muted">Manage and monitor all registered users</p>
         </div>
+
         <button className="btn btn-primary">
           <i className="bi bi-person-plus me-2"></i>
           Add New User
         </button>
       </div>
 
-      {/* Stats Cards */}
+      {/* STATS CARDS */}
       <div className="row g-3 mb-4">
         <div className="col-md-3">
           <div className="mini-stat-card">
@@ -47,6 +49,7 @@ function Users() {
             </div>
           </div>
         </div>
+
         <div className="col-md-3">
           <div className="mini-stat-card">
             <div className="mini-stat-icon bg-success-subtle">
@@ -58,6 +61,7 @@ function Users() {
             </div>
           </div>
         </div>
+
         <div className="col-md-3">
           <div className="mini-stat-card">
             <div className="mini-stat-icon bg-warning-subtle">
@@ -69,6 +73,7 @@ function Users() {
             </div>
           </div>
         </div>
+
         <div className="col-md-3">
           <div className="mini-stat-card">
             <div className="mini-stat-icon bg-info-subtle">
@@ -82,7 +87,7 @@ function Users() {
         </div>
       </div>
 
-      {/* Search */}
+      {/* SEARCH BAR */}
       <div className="card mb-4">
         <div className="card-body">
           <div className="input-group">
@@ -100,46 +105,57 @@ function Users() {
         </div>
       </div>
 
-      {/* Users Table */}
+      {/* USERS TABLE */}
       <div className="card">
+        <div className="card-header">
+          <h5 className="mb-0">Users List</h5>
+        </div>
+
         <div className="card-body p-0">
-          <div className="table-responsive">
+          <div className="table-responsive users-table-wrapper">
             <table className="table table-hover mb-0">
-              <thead>
+              <thead className="table-light">
                 <tr>
                   <th>ID</th>
-                  <th>Name</th>
+                  <th>User</th>
                   <th>Email</th>
                   <th>Phone</th>
                   <th>Orders</th>
-                  <th>Total Spent</th>
+                  <th>Spent</th>
                   <th>Status</th>
                   <th>Joined</th>
                   <th>Actions</th>
                 </tr>
               </thead>
+
               <tbody>
                 {filteredUsers.map(user => (
                   <tr key={user.id}>
                     <td className="fw-semibold">#{user.id}</td>
+
                     <td>
                       <div className="d-flex align-items-center">
-                        <div className="user-avatar me-2">
-                          {user.name.charAt(0)}
-                        </div>
-                        {user.name}
+                        <div className="user-avatar me-2">{user.name.charAt(0)}</div>
+                        <span>{user.name}</span>
                       </div>
                     </td>
+
                     <td className="text-muted">{user.email}</td>
                     <td>{user.phone}</td>
                     <td>{user.orders}</td>
-                    <td className="fw-semibold">Rs {user.totalSpent.toLocaleString()}</td>
+
+                    <td className="fw-semibold">
+                      Rs {user.totalSpent.toLocaleString()}
+                    </td>
+
                     <td>
-                      <span className={`badge ${user.status === 'active' ? 'bg-success' : 'bg-secondary'}`}>
+                      <span className={`badge ${user.status === "active" ? "bg-success" : "bg-secondary"}`}>
                         {user.status}
                       </span>
                     </td>
+
                     <td>{new Date(user.joined).toLocaleDateString()}</td>
+
                     <td>
                       <div className="btn-group btn-group-sm">
                         <button className="btn btn-outline-primary" title="View">
@@ -156,31 +172,25 @@ function Users() {
                   </tr>
                 ))}
               </tbody>
+
             </table>
           </div>
         </div>
-        <div className="card-footer">
-          <div className="d-flex justify-content-between align-items-center">
-            <span className="text-muted">Showing {filteredUsers.length} of {users.length} users</span>
-            <nav>
-              <ul className="pagination pagination-sm mb-0">
-                <li className="page-item disabled">
-                  <span className="page-link">Previous</span>
-                </li>
-                <li className="page-item active">
-                  <span className="page-link">1</span>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">2</a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">Next</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
+
+        <div className="card-footer d-flex justify-content-between">
+          <span className="text-muted">
+            Showing {filteredUsers.length} of {users.length} users
+          </span>
+
+          <ul className="pagination pagination-sm mb-0">
+            <li className="page-item disabled"><span className="page-link">Prev</span></li>
+            <li className="page-item active"><span className="page-link">1</span></li>
+            <li className="page-item"><a className="page-link" href="#">2</a></li>
+            <li className="page-item"><a className="page-link" href="#">Next</a></li>
+          </ul>
         </div>
       </div>
+
     </div>
   );
 }

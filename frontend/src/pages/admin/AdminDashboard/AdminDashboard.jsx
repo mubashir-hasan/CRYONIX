@@ -23,6 +23,7 @@ function AdminDashboard() {
     try {
       const token = localStorage.getItem('accessToken');
 
+      // Fetch stats
       const statsResponse = await fetch('http://localhost:5000/api/admin/stats', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -77,7 +78,7 @@ function AdminDashboard() {
   }
 
   return (
-    <div className="dashboard-container m-5">
+    <div className="dashboard-container">
       {/* Header */}
       <div className="dashboard-header mb-4">
         <div>

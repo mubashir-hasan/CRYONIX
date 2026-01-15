@@ -1,7 +1,9 @@
 /* Dashboard Styles */
 
 .dashboard-container {
-    padding: 0;
+    padding: 2rem;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .dashboard-header {

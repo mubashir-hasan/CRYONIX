@@ -1,7 +1,9 @@
 /* Admin Pages Common Styles */
 
 .admin-page {
-    padding: 0;
+    padding: 2rem;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 /* Page Header */
@@ -104,6 +106,25 @@
     justify-content: space-between;
     align-items: center;
     font-size: 0.875rem;
+}
+
+.users-table-wrapper {
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.users-table-wrapper thead th {
+    position: sticky;
+    top: 0;
+    background: var(--bs-secondary-bg);
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .users-table-wrapper {
+        max-height: 350px;
+    }
 }
 
 /* Chart Container */

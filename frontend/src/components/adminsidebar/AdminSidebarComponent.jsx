@@ -15,8 +15,8 @@ function AdminSidebar({ isCollapsed, setIsCollapsed }) {
             { title: 'Dashboard', icon: 'bi-speedometer2', path: '/admin/dashboard' }, 
             { title: 'Products', icon: 'bi-box-seam', 
                 submenu: [
-                    { title: 'All Products', path: '/admin/products' }, 
-                    { title: 'Add Product', path: '/admin/add-product' }
+                    { title: 'All Products', icon: 'bi-list-ul', path: '/admin/products' }, 
+                    { title: 'Add Product', icon: 'bi-plus-square', path: '/admin/add-product' }
                 ] 
             }, 
             { title: 'Orders', icon: 'bi-cart-check', path: '/admin/orders' }, 
@@ -105,14 +105,16 @@ function AdminSidebar({ isCollapsed, setIsCollapsed }) {
                                         {!isCollapsed && (
                                             <ul className={`submenu ${openSubmenu === index ? "show" : ""}`}>
                                                 {item.submenu.map((sub, i) => (
-                                                    <li key={i}>
+                                                    <li key={i} className='list-unstyled'>
                                                         <Link
                                                             to={sub.path}
                                                             className={`submenu-link ${location.pathname === sub.path ? "active" : ""}`}
                                                         >
+                                                            <i className={`bi ${sub.icon} me-2`} />
                                                             {sub.title}
                                                         </Link>
                                                     </li>
+
                                                 ))}
                                             </ul>
                                         )}
