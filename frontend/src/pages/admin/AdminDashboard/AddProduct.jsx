@@ -114,7 +114,7 @@ function AddProduct() {
 
                     {error && (
                         <div className="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i className="bi bi-exclamation-triangle me-2"></i>
+                            <i className="bi bi-exclamation-triangle text-black me-2"></i>
                             {error}
                             <button type="button" className="btn-close" onClick={() => setError('')}></button>
                         </div>
@@ -154,7 +154,7 @@ function AddProduct() {
                                             Price (Rs) <span className="text-danger">*</span>
                                         </label>
                                         <div className="input-group input-group-lg">
-                                            <span className="input-group-text">Rs</span>
+                                            <span className="input-group-text text-dark">Rs</span>
                                             <input
                                                 type="number"
                                                 className="form-control"

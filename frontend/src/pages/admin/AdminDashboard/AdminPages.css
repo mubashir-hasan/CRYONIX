@@ -18,13 +18,13 @@
 .page-title {
     font-size: 2rem;
     font-weight: 700;
-    color: var(--bs-text-primary);
+    color: var(--bs-text-primary) !important;
 }
 
 /* Mini Stat Cards */
 .mini-stat-card {
-    background: var(--bs-secondary-bg);
-    border: 2px solid var(--bs-border-color-subtle);
+    background: var(--bs-secondary-bg) !important;
+    border: 2px solid var(--bs-border-color-subtle) !important;
     border-radius: 12px;
     padding: 1.25rem;
     display: flex;
@@ -46,12 +46,12 @@
 .mini-stat-card h4 {
     font-size: 1.75rem;
     font-weight: 700;
-    color: var(--bs-text-primary);
+    color: var(--bs-text-primary) !important;
     margin: 0;
 }
 
 .mini-stat-card small {
-    color: var(--bs-text-secondary);
+    color: var(--bs-text-secondary) !important;
     font-size: 0.875rem;
 }
 
@@ -60,7 +60,7 @@
     width: 36px;
     height: 36px;
     background: var(--bs-primary);
-    color: #000000;
+    color: #000000 !important;
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -72,7 +72,7 @@
 /* Metric Cards (Analytics) */
 .metric-card {
     background: var(--bs-secondary-bg);
-    border: 2px solid var(--bs-border-color-subtle);
+    border: 2px solid var(--bs-border-color-subtle) !important;
     border-radius: 12px;
     padding: 1.5rem;
 }
@@ -86,7 +86,7 @@
 
 .metric-label {
     font-size: 0.875rem;
-    color: var(--bs-text-secondary);
+    color: var(--bs-text-secondary) !important;
     font-weight: 500;
 }
 
@@ -97,7 +97,7 @@
 .metric-value {
     font-size: 2rem;
     font-weight: 700;
-    color: var(--bs-text-primary);
+    color: var(--bs-text-primary) !important;
     margin-bottom: 0.5rem;
 }
 
@@ -107,6 +107,11 @@
     align-items: center;
     font-size: 0.875rem;
 }
+
+.users-table-wrapper table {
+    color: var(--bs-body-color) !important;
+}
+
 
 .users-table-wrapper {
     max-height: 500px;
@@ -168,19 +173,19 @@
 .chart-value {
     font-size: 0.75rem;
     font-weight: 700;
-    color: #000000;
+    color: #000000 !important;
 }
 
 .chart-label {
     font-size: 0.875rem;
-    color: var(--bs-text-secondary);
+    color: var(--bs-text-secondary) !important;
     font-weight: 500;
 }
 
 /* Category Progress */
 .category-item {
     padding: 1rem 0;
-    border-bottom: 1px solid var(--bs-border-color-subtle);
+    border-bottom: 1px solid var(--bs-border-color-subtle) !important;
 }
 
 .category-item:last-child {
@@ -195,7 +200,7 @@
 .category-info h6 {
     font-size: 0.95rem;
     font-weight: 600;
-    color: var(--bs-text-primary);
+    color: var(--bs-text-primary) !important;
     margin: 0;
 }
 
@@ -219,7 +224,7 @@
 .category-progress .percentage {
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--bs-text-secondary);
+    color: var(--bs-text-secondary) !important;
     min-width: 40px;
     text-align: right;
 }
@@ -256,7 +261,7 @@
 
 .activity-message {
     font-size: 0.95rem;
-    color: var(--bs-text-primary);
+    color: var(--bs-text-primary) !important;
     font-weight: 500;
 }
 
@@ -266,7 +271,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.25rem 0;
-    border-bottom: 1px solid var(--bs-border-color-subtle);
+    border-bottom: 1px solid var(--bs-border-color-subtle) !important;
 }
 
 .notification-setting:last-child {
@@ -281,21 +286,27 @@
 .notification-setting h6 {
     font-size: 0.95rem;
     font-weight: 600;
-    color: var(--bs-text-primary);
+    color: var(--bs-text-primary) !important;
 }
 
 .form-check-input:checked {
-    background-color: var(--bs-primary);
-    border-color: var(--bs-primary);
+    background-color: var(--bs-primary) !important;
+    border-color: var(--bs-primary) !important;
+}
+
+input::placeholder {
+    color: #6c757d !important;
+    /* Bootstrap-muted */
+    opacity: 1;
 }
 
 /* Nav Tabs Override */
 .nav-tabs {
-    border-bottom: 2px solid var(--bs-border-color-subtle);
+    border-bottom: 2px solid var(--bs-border-color-subtle) !important;
 }
 
 .nav-tabs .nav-link {
-    color: var(--bs-text-secondary);
+    color: var(--bs-text-secondary) !important;
     border: none;
     border-bottom: 2px solid transparent;
     font-weight: 500;
@@ -303,26 +314,26 @@
 }
 
 .nav-tabs .nav-link:hover {
-    border-color: transparent;
-    color: var(--bs-primary);
+    border-color: transparent !important;
+    color: var(--bs-primary) !important;
 }
 
 .nav-tabs .nav-link.active {
     color: var(--bs-primary);
     background: transparent;
-    border-bottom-color: var(--bs-primary);
+    border-bottom-color: var(--bs-primary) !important;
 }
 
 /* List Group Override */
 .list-group-item {
     background: transparent;
-    border: 1px solid var(--bs-border-color-subtle);
-    color: var(--bs-text-primary);
+    border: 1px solid var(--bs-border-color-subtle) !important;
+    color: var(--bs-text-primary) !important;
     padding: 1.25rem;
 }
 
 .list-group-item h6 {
-    color: var(--bs-text-primary);
+    color: var(--bs-text-primary) !important;
 }
 
 /* Responsive */
@@ -361,4 +372,9 @@
     .mini-stat-card h4 {
         font-size: 1.5rem;
     }
+}
+
+
+.table> :not(caption)>*>* {
+    color: var(--bs-text-primary) !important;
 }

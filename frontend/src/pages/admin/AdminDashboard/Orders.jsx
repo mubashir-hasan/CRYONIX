@@ -102,7 +102,7 @@ function Orders() {
             <div className="col-md-8">
               <div className="input-group">
                 <span className="input-group-text">
-                  <i className="bi bi-search"></i>
+                  <i className="bi bi-search text-black"></i>
                 </span>
                 <input
                   type="text"

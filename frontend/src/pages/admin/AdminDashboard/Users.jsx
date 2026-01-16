@@ -21,13 +21,13 @@ function Users() {
   );
 
   return (
-    <div className="admin-page m-4">
+    <div className="admin-page">
 
       {/* PAGE HEADER */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
           <h2 className="page-title mb-1">Users Management</h2>
-          <p className="text-muted">Manage and monitor all registered users</p>
+          <p className="text-body-secondary">Manage and monitor all registered users</p>
         </div>
 
         <button className="btn btn-primary">
@@ -45,7 +45,7 @@ function Users() {
             </div>
             <div>
               <h4 className="mb-0">{users.length}</h4>
-              <small className="text-muted">Total Users</small>
+              <small className="text-body-secondary">Total Users</small>
             </div>
           </div>
         </div>
@@ -57,7 +57,7 @@ function Users() {
             </div>
             <div>
               <h4 className="mb-0">{users.filter(u => u.status === 'active').length}</h4>
-              <small className="text-muted">Active Users</small>
+              <small className="text-body-secondary">Active Users</small>
             </div>
           </div>
         </div>
@@ -69,7 +69,7 @@ function Users() {
             </div>
             <div>
               <h4 className="mb-0">2</h4>
-              <small className="text-muted">New This Week</small>
+              <small className="text-body-secondary">New This Week</small>
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@ function Users() {
             </div>
             <div>
               <h4 className="mb-0">Rs 250K</h4>
-              <small className="text-muted">Total Revenue</small>
+              <small className="text-body-secondary">Total Revenue</small>
             </div>
           </div>
         </div>
@@ -92,7 +92,7 @@ function Users() {
         <div className="card-body">
           <div className="input-group">
             <span className="input-group-text">
-              <i className="bi bi-search"></i>
+              <i className="bi bi-search text-black"></i>
             </span>
             <input
               type="text"
@@ -140,7 +140,7 @@ function Users() {
                       </div>
                     </td>
 
-                    <td className="text-muted">{user.email}</td>
+                    <td className="text-body-secondary">{user.email}</td>
                     <td>{user.phone}</td>
                     <td>{user.orders}</td>
 
@@ -178,7 +178,7 @@ function Users() {
         </div>
 
         <div className="card-footer d-flex justify-content-between">
-          <span className="text-muted">
+          <span className="text-body-secondary">
             Showing {filteredUsers.length} of {users.length} users
           </span>
 

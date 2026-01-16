@@ -46,6 +46,12 @@ body {
   color: var(--bs-body-color);
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 /* Button Styles */
 .btn-primary {
   background: var(--bs-btn-bg);
