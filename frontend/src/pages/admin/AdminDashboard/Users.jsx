@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './AdminPages.css';
+import axios from 'axios';
 
 function Users() {
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Static users data
   const users = [
     { id: 1, name: 'John Doe', email: 'john@example.com', phone: '03001234567', orders: 12, totalSpent: 45000, status: 'active', joined: '2024-06-15' },
     { id: 2, name: 'Jane Smith', email: 'jane@example.com', phone: '03007654321', orders: 8, totalSpent: 28500, status: 'active', joined: '2024-07-20' },
@@ -13,6 +13,14 @@ function Users() {
     { id: 5, name: 'Tom Brown', email: 'tom@example.com', phone: '03006543210', orders: 20, totalSpent: 85000, status: 'active', joined: '2024-04-12' },
     { id: 6, name: 'Emma Davis', email: 'emma@example.com', phone: '03002345678', orders: 3, totalSpent: 12000, status: 'active', joined: '2025-01-08' },
   ];
+
+  axios.get('http://localhost:5000/api/user/get_all_users')
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.error('There was an error fetching the users!', error);
+    });
 
   const filteredUsers = users.filter(user =>
     user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
