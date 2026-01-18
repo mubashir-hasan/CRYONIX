@@ -16,18 +16,17 @@ function Users() {
 
   axios.get('http://localhost:5000/api/user/get_all_users')
     .then(response => {
-      console.log(response.data);
+      const fetchedUsers = response.data.users;
     })
     .catch(error => {
       console.error('There was an error fetching the users!', error);
     });
 
-  const filteredUsers = users.filter(user =>
+  const filteredUsers = fetchedUsers.filter(user =>
     user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
     user.phone.includes(searchQuery)
   );
-
   return (
     <div className="admin-page">
 
@@ -52,7 +51,7 @@ function Users() {
               <i className="bi bi-people text-primary"></i>
             </div>
             <div>
-              <h4 className="mb-0">{users.length}</h4>
+              <h4 className="mb-0">{fetchedUsers.length}</h4>
               <small className="text-body-secondary">Total Users</small>
             </div>
           </div>
