@@ -76,23 +76,3 @@ export const userLogin = (req , res)=>{
     })
 
 };
-
-
-export const getAllUsers = (req, res) => {
-    const query = `SELECT id, name, email, phone_no, created_at FROM users`;
-    db.query(query, (err, result) => {
-        if(err){
-            res.status(500).json({
-                status:false,
-                message: "Something Went Wrong"
-            });
-        }else{
-            res.status(200).json({
-                status:true,
-                message:"All Users",
-                users:result
-            })
-            }
-        }
-    )
-};

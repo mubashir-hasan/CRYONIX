@@ -4,6 +4,7 @@ import axios from 'axios';
 
 function Users() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [fetchedUsers, setFetchedUsers] = useState([]);
 
   const users = [
     { id: 1, name: 'John Doe', email: 'john@example.com', phone: '03001234567', orders: 12, totalSpent: 45000, status: 'active', joined: '2024-06-15' },
@@ -14,9 +15,9 @@ function Users() {
     { id: 6, name: 'Emma Davis', email: 'emma@example.com', phone: '03002345678', orders: 3, totalSpent: 12000, status: 'active', joined: '2025-01-08' },
   ];
 
-  axios.get('http://localhost:5000/api/user/get_all_users')
+  axios.get('http://localhost:5000/api/admin/get_all_users')
     .then(response => {
-      const fetchedUsers = response.data.users;
+      setFetchedUsers(response.data.users);
     })
     .catch(error => {
       console.error('There was an error fetching the users!', error);
@@ -63,7 +64,7 @@ function Users() {
               <i className="bi bi-check-circle text-success"></i>
             </div>
             <div>
-              <h4 className="mb-0">{users.filter(u => u.status === 'active').length}</h4>
+              <h4 className="mb-0">{fetchedUsers.filter(u => u.status === 'active').length}</h4>
               <small className="text-body-secondary">Active Users</small>
             </div>
           </div>
@@ -148,20 +149,20 @@ function Users() {
                     </td>
 
                     <td className="text-body-secondary">{user.email}</td>
-                    <td>{user.phone}</td>
-                    <td>{user.orders}</td>
+                    <td>{user.phone_no}</td>
+                    {/* <td>{user.orders}</td> */}
 
                     <td className="fw-semibold">
-                      Rs {user.totalSpent.toLocaleString()}
+                      {/* Rs {user.totalSpent.toLocaleString()} */}
                     </td>
 
                     <td>
                       <span className={`badge ${user.status === "active" ? "bg-success" : "bg-secondary"}`}>
-                        {user.status}
+                        {/* {user.status} */}
                       </span>
                     </td>
 
-                    <td>{new Date(user.joined).toLocaleDateString()}</td>
+                    <td>{new Date(user.created_at).toLocaleDateString()}</td>
 
                     <td>
                       <div className="btn-group btn-group-sm">
@@ -186,7 +187,7 @@ function Users() {
 
         <div className="card-footer d-flex justify-content-between">
           <span className="text-body-secondary">
-            Showing {filteredUsers.length} of {users.length} users
+            Showing {filteredUsers.length} of {fetchedUsers.length} users
           </span>
 
           <ul className="pagination pagination-sm mb-0">
