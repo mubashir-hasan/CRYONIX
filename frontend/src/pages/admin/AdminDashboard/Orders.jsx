@@ -39,7 +39,7 @@ function Orders() {
       <div className="page-header mb-4">
         <div>
           <h2 className="page-title mb-2">Orders Management</h2>
-          <p className="text-muted mb-0">View and manage all customer orders</p>
+          <p className="text-body-primary mb-0">View and manage all customer orders</p>
         </div>
         <button className="btn btn-primary">
           <i className="bi bi-download me-2"></i>
@@ -179,10 +179,10 @@ function Orders() {
         </div>
         <div className="card-footer">
           <div className="d-flex justify-content-between align-items-center">
-            <span className="text-muted">Showing {filteredOrders.length} of {orders.length} orders</span>
+            <span className="text-body-primary">Showing {filteredOrders.length} of {orders.length} orders</span>
             <nav>
               <ul className="pagination pagination-sm mb-0">
-                <li className="page-item disabled">
+                <li className="page-item">
                   <span className="page-link">Previous</span>
                 </li>
                 <li className="page-item active">

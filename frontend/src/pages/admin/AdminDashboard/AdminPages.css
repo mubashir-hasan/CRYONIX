@@ -377,4 +377,5 @@ input::placeholder {
 
 .table> :not(caption)>*>* {
     color: var(--bs-text-primary) !important;
+    background-color: var(--bs-secondary-bg) !important;
 }

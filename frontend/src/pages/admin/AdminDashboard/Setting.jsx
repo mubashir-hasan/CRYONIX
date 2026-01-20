@@ -35,7 +35,7 @@ function Settings() {
             <div className="page-header mb-4">
                 <div>
                     <h2 className="page-title mb-2">Settings</h2>
-                    <p className="text-muted mb-0">Manage your store settings and preferences</p>
+                    <p className="text-body-primary mb-0">Manage your store settings and preferences</p>
                 </div>
                 <button className="btn btn-primary" onClick={handleSave}>
                     <i className="bi bi-check-circle me-2"></i>

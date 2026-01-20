@@ -35,7 +35,7 @@ function Analytics() {
             <div className="page-header mb-4">
                 <div>
                     <h2 className="page-title mb-2">Analytics</h2>
-                    <p className="text-muted mb-0">Track your business performance and insights</p>
+                    <p className="text-body-primary mb-0">Track your business performance and insights</p>
                 </div>
                 <div className="btn-group">
                     <button

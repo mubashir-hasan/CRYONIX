@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AdminPages.css';
 import axios from 'axios';
 
@@ -15,13 +15,22 @@ function Users() {
     { id: 6, name: 'Emma Davis', email: 'emma@example.com', phone: '03002345678', orders: 3, totalSpent: 12000, status: 'active', joined: '2025-01-08' },
   ];
 
-  axios.get('http://localhost:5000/api/admin/get_all_users')
-    .then(response => {
-      setFetchedUsers(response.data.users);
-    })
-    .catch(error => {
-      console.error('There was an error fetching the users!', error);
-    });
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/admin/get_all_users"
+        );
+        setFetchedUsers(response.data.users);
+      } catch (error) {
+        console.error("There was an error fetching the users!", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
 
   const filteredUsers = fetchedUsers.filter(user =>
     user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -35,7 +44,7 @@ function Users() {
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
           <h2 className="page-title mb-1">Users Management</h2>
-          <p className="text-body-secondary">Manage and monitor all registered users</p>
+          <p className="text-body-primary">Manage and monitor all registered users</p>
         </div>
 
         <button className="btn btn-primary">
@@ -186,12 +195,12 @@ function Users() {
         </div>
 
         <div className="card-footer d-flex justify-content-between">
-          <span className="text-body-secondary">
+          <span className="text-body-primary">
             Showing {filteredUsers.length} of {fetchedUsers.length} users
           </span>
 
           <ul className="pagination pagination-sm mb-0">
-            <li className="page-item disabled"><span className="page-link">Prev</span></li>
+            <li className="page-item "><span className="page-link">Prev</span></li>
             <li className="page-item active"><span className="page-link">1</span></li>
             <li className="page-item"><a className="page-link" href="#">2</a></li>
             <li className="page-item"><a className="page-link" href="#">Next</a></li>
