@@ -137,9 +137,9 @@ function Users() {
                   <th>User</th>
                   <th>Email</th>
                   <th>Phone</th>
-                  <th>Orders</th>
+                  {/* <th>Orders</th>
                   <th>Spent</th>
-                  <th>Status</th>
+                  <th>Status</th> */}
                   <th>Joined</th>
                   <th>Actions</th>
                 </tr>
@@ -161,15 +161,15 @@ function Users() {
                     <td>{user.phone_no}</td>
                     {/* <td>{user.orders}</td> */}
 
-                    <td className="fw-semibold">
-                      {/* Rs {user.totalSpent.toLocaleString()} */}
-                    </td>
+                    {/* <td className="fw-semibold">
+                      Rs {user.totalSpent.toLocaleString()}
+                    </td> */}
 
-                    <td>
+                    {/* <td>
                       <span className={`badge ${user.status === "active" ? "bg-success" : "bg-secondary"}`}>
-                        {/* {user.status} */}
+                        {user.status}
                       </span>
-                    </td>
+                    </td> */}
 
                     <td>{new Date(user.created_at).toLocaleDateString()}</td>
 
