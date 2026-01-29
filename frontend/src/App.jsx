@@ -22,6 +22,7 @@ import Orders from './pages/admin/AdminDashboard/Orders';
 import Users from './pages/admin/AdminDashboard/Users';
 import Analytics from './pages/admin/AdminDashboard/Analytics';
 import Settings from './pages/admin/AdminDashboard/Setting';
+import Cart from './pages/cart/Cart';
 
 function App() {
 
@@ -29,8 +30,15 @@ function App() {
   const location = useLocation();
   const hideNavbarAndFooter = location.pathname.startsWith("/admin");
 
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+
   return (
     <>
+      <CartSidebar
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+      />
       <ScrollToTop />
       <ScrollToTopButton />
       <ToastContainer position="top-right" autoClose={3000} />
@@ -44,6 +52,8 @@ function App() {
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path='/user/user_login' element={<UserLogin />} />
         <Route path='/user/user_signup' element={<UserSignup />} />
+        <Route path='/user/cart' element={<Cart />} />
+
 
         <Route path='/admin/login' element={<AdminLogin />} />
 

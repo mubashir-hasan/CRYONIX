@@ -1,29 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Cart.css';
 
 function Cart() {
     const [cartProducts, setCartProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         fetchCartProducts();
     }, []);
 
     const fetchCartProducts = () => {
-        axios.get('http://localhost:5000/api/cart/cartproducts')
-            .then(res => {
-                if (res.data.status) {
-                    setCartProducts(res.data.products);
-                }
-                setLoading(false);
-            })
-            .catch(err => {
-                console.log(err);
-                setLoading(false);
-            });
+        // Mock data - replace with actual API call
+        const mockCart = [
+            {
+                id: 1,
+                name: 'Wireless Headphones',
+                price: 299,
+                quantity: 1,
+                image_url: 'uploads/product1.jpg',
+                description: 'Premium wireless headphones with noise cancellation',
+                sku: 'WH-001',
+                stock: 10
+            },
+            {
+                id: 2,
+                name: 'Smart Watch Pro',
+                price: 399,
+                quantity: 2,
+                image_url: 'uploads/product2.jpg',
+                description: 'Advanced smartwatch with health tracking',
+                sku: 'SW-002',
+                stock: 15
+            }
+        ];
+        setCartProducts(mockCart);
+        setLoading(false);
+    };
+
+    const goBack = () => {
+        // Go back to previous page or products page
+        if (window.history.length > 2) {
+            navigate(-1);
+        } else {
+            navigate('/product');
+        }
     };
 
     const updateQuantity = (productId, newQuantity) => {
@@ -82,8 +105,8 @@ function Cart() {
             <div className="container">
                 {/* Header */}
                 <div className="cart-header">
-                    <button onClick={() => navigate('/product')} className="back-btn">
-                        <i className="bi bi-arrow-left"></i> Continue Shopping
+                    <button onClick={goBack} className="back-btn">
+                        <i className="bi bi-arrow-left"></i> Go Back
                     </button>
                     <h1 className="cart-title">
                         Shopping <span className="text-gradient">Cart</span>
