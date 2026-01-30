@@ -181,6 +181,12 @@ function Navbar() {
                     )}
                 </div>
             </div>
+            <button onClick={onCartClick} className="cart-link">
+                <i className="bi bi-cart3"></i>
+                {cartCount > 0 && (
+                    <span className="cart-badge">{cartCount}</span>
+                )}
+            </button>
         </nav>
     );
 }
