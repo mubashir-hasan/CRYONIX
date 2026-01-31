@@ -112,7 +112,6 @@ function Navbar() {
                         </>
                     )}
 
-                    {/* Logged In User Navigation */}
                     {authType === 'user' && (
                         <>
                             <div className="navbar-nav d-flex mx-auto gap-2">
@@ -129,12 +128,12 @@ function Navbar() {
 
                             <div className="d-flex ms-auto my-2 align-items-center gap-3">
                                 {/* Cart Icon with Badge */}
-                                <Link to='/cart' className="cart-link">
+                                <button onClick={onCartClick} className="cart-link">
                                     <i className="bi bi-cart3"></i>
                                     {cartCount > 0 && (
                                         <span className="cart-badge">{cartCount}</span>
                                     )}
-                                </Link>
+                                </button>
 
                                 {/* User Dropdown */}
                                 <div className="dropdown">
