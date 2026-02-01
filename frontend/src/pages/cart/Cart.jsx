@@ -13,7 +13,6 @@ function Cart() {
     }, []);
 
     const fetchCartProducts = () => {
-        // Mock data - replace with actual API call
         const mockCart = [
             {
                 id: 1,
@@ -41,7 +40,6 @@ function Cart() {
     };
 
     const goBack = () => {
-        // Go back to previous page or products page
         if (window.history.length > 2) {
             navigate(-1);
         } else {
@@ -51,19 +49,16 @@ function Cart() {
 
     const updateQuantity = (productId, newQuantity) => {
         if (newQuantity < 1) return;
-
-        // Update locally first for better UX
         setCartProducts(prev =>
             prev.map(item =>
                 item.id === productId ? { ...item, quantity: newQuantity } : item
             )
         );
 
-        // Then update on server
         axios.put(`http://localhost:5000/api/cart/update/${productId}`, { quantity: newQuantity })
             .catch(err => {
                 console.log(err);
-                fetchCartProducts(); // Refetch if update fails
+                fetchCartProducts();
             });
     };
 
@@ -82,7 +77,7 @@ function Cart() {
     };
 
     const calculateTax = () => {
-        return calculateSubtotal() * 0.1; // 10% tax
+        return calculateSubtotal() * 0.1;
     };
 
     const calculateTotal = () => {
