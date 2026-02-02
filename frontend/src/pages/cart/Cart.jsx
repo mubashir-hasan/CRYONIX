@@ -98,7 +98,6 @@ function Cart() {
     return (
         <div className="cart-page">
             <div className="container">
-                {/* Header */}
                 <div className="cart-header">
                     <button onClick={goBack} className="back-btn">
                         <i className="bi bi-arrow-left"></i> Go Back
@@ -112,7 +111,6 @@ function Cart() {
                 </div>
 
                 {cartProducts.length === 0 ? (
-                    /* Empty Cart */
                     <div className="empty-cart">
                         <div className="empty-cart-icon">
                             <i className="bi bi-cart-x"></i>
@@ -129,7 +127,6 @@ function Cart() {
                     </div>
                 ) : (
                     <div className="row g-4">
-                        {/* Cart Items */}
                         <div className="col-lg-8">
                             <div className="cart-items-container">
                                 {cartProducts.map((item) => (
@@ -200,7 +197,6 @@ function Cart() {
                             </div>
                         </div>
 
-                        {/* Order Summary */}
                         <div className="col-lg-4">
                             <div className="order-summary">
                                 <h3 className="summary-title">Order Summary</h3>

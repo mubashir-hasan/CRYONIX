@@ -4,7 +4,7 @@ import './Navbar.css';
 import logo from '../../assets/logo.svg';
 import { useAuth } from '../../context/AuthContext.jsx';
 
-function Navbar() {
+function Navbar({ onCartClick }) {
     const [scrolled, setScrolled] = useState(false);
     const [cartCount, setCartCount] = useState(0);
     const location = useLocation();

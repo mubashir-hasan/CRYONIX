@@ -23,6 +23,8 @@ import Users from './pages/admin/AdminDashboard/Users';
 import Analytics from './pages/admin/AdminDashboard/Analytics';
 import Settings from './pages/admin/AdminDashboard/Setting';
 import Cart from './pages/cart/Cart';
+import { useState } from 'react';
+import CartSidebar from './components/cartSidebar/CartSidebar';
 
 function App() {
 
